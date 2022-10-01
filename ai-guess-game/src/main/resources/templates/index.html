@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Guessing game</title>
+    </head>
+</head>
+<body>
+<center>
+    <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Riddle"*/-->
+    <img th:src="@{'/' + ${riddle.id}}" width="500"/>
+
+    <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Guess"*/-->
+    <form action="#" th:action="@{'/' + ${riddle.id} + '/guess'}" th:object="${guess}" method="post">
+        <p>Phrase: <input type="text" th:field="*{phrase}" /></p>
+        <div th:if="${results != null}">
+<!--            <tr th:each="entry : ${results.state}">-->
+<!--                <td th:style="${entry.value == T(com.yonatankarp.ai.guess.game.GuessResult).CORRECT ? 'color: green;' : 'color: yellow;'}" th:text="${entry.key}"></td>-->
+<!--            </tr>-->
+
+            <tr th:each="entry : ${results.state}">
+                <td th:text="${entry.key}" th:style="${entry.value}">keyvalue</td>
+                <td th:text="${entry.value}">num</td>
+            </tr>
+        </div>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</center>
+</body>
+</html>
