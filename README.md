@@ -1,38 +1,13 @@
-# spring-boot-app-template
+# ai-guess-game
 
-[![Build](https://github.com/yonatankarp/spring-boot-app-template/actions/workflows/ci.yml/badge.svg)](https://github.com/yonatankarp/spring-boot-app-template/actions/workflows/ci.yml)
-[![Linters](https://github.com/yonatankarp/spring-boot-app-template/actions/workflows/linting.yml/badge.svg)](https://github.com/yonatankarp/spring-boot-app-template/actions/workflows/linting.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_spring-boot-app-template&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yonatankarp_spring-boot-app-template)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_spring-boot-app-template&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=yonatankarp_spring-boot-app-template)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_spring-boot-app-template&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=yonatankarp_spring-boot-app-template)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_spring-boot-app-template&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=yonatankarp_spring-boot-app-template)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_spring-boot-app-template&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=yonatankarp_spring-boot-app-template)
+[![Build](https://github.com/yonatankarp/ai-guess-game/actions/workflows/ci.yml/badge.svg)](https://github.com/yonatankarp/ai-guess-game/actions/workflows/ci.yml)
+[![Linters](https://github.com/yonatankarp/ai-guess-game/actions/workflows/linting.yml/badge.svg)](https://github.com/yonatankarp/ai-guess-game/actions/workflows/linting.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_ai-guess-game&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=yonatankarp_ai-guess-game)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_ai-guess-game&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=yonatankarp_ai-guess-game)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_ai-guess-game&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=yonatankarp_ai-guess-game)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_ai-guess-game&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=yonatankarp_ai-guess-game)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_ai-guess-game&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=yonatankarp_ai-guess-game)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-## Purpose
-
-This is a template to fast and easily bootstrap new spring boot web
-applications that including full build based on Gradle, CI based on GitHub
-actions, and containers based on Docker
-
-## What's inside
-
-The template is a working application with a minimal setup. It contains:
-
-- application skeleton
-- setup script to prepare project
-- common plugins and libraries
-- docker & docker-compose setup
-- code quality tools already set up
-- integration with GitHub Actions
-- integration with Dependabot
-- integration with SonarCloudA
-- MIT license and contribution information
-
-## Setup
-
-Located in `./bin/init.sh`. Simply run and follow the explanation how to
-execute it. This script will self-destroy itself when finished.
 
 ## Getting Started
 
@@ -86,7 +61,7 @@ For Apple M1 processor run the following instead:
 DOCKER_BUILDKIT=0 docker compose build
 ```
 
-Run the distribution (created in `spring-boot-app-template/build/install/spring-boot-app-template`
+Run the distribution (created in `ai-guess-game/build/install/ai-guess-game`
 directory) by executing the following command:
 
 ```shell
@@ -94,12 +69,12 @@ directory) by executing the following command:
 ```
 
 This will start the API container exposing the application's port
-(set to `8080` in this app).
+(set to `80` in this app).
 
 In order to test if the application is up, you can call its health endpoint:
 
 ```shell
-  curl http://localhost:8080/health
+  curl http://localhost:80/health
 ```
 
 You should get a response similar to this:

@@ -1,8 +1,8 @@
 FROM eclipse-temurin:17-jre-alpine
 
 ENV APP_BASE="/home" \
-    APP_NAME="spring-boot-app-template" \
-    SERVER_PORT="8080"
+    APP_NAME="ai-guess-game" \
+    SERVER_PORT="80"
 
 EXPOSE ${SERVER_PORT}
 

@@ -1,4 +1,4 @@
-package com.yonatankarp.springbootapptemplate.controllers
+package com.yonatankarp.ai.guess.game.controllers
 
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
@@ -20,5 +20,5 @@ class RootController {
      * @return Welcome message from the service.
      */
     @GetMapping("/")
-    fun welcome(): ResponseEntity<String> = ok("Welcome to spring-boot-app-template")
+    fun welcome(): ResponseEntity<String> = ok("Welcome to ai-guess-game")
 }

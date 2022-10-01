@@ -1,10 +1,10 @@
 version: "3.9"
 services:
-  spring-boot-app-template:
-    container_name: spring-boot-app-template
+  ai-guess-game:
+    container_name: ai-guess-game
     build:
       context: .
-      dockerfile: ./spring-boot-app-template/Dockerfile
+      dockerfile: ./ai-guess-game/Dockerfile
     networks:
       - proxynet
     environment:
@@ -14,4 +14,4 @@ services:
 
 networks:
   proxynet:
-    name: spring-boot-app-template-network
+    name: ai-guess-game-network
