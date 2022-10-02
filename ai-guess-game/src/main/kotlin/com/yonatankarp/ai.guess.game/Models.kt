@@ -6,5 +6,5 @@ data class Response(val state: List<Pair<String, String>> = emptyList(), val gue
 
 enum class GuessResult {
     HIT,
-    MISSED
+    MISS
 }

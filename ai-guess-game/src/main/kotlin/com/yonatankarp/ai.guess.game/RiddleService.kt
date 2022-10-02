@@ -16,8 +16,7 @@ class RiddleService(val riddleManager: RiddleManager) {
         if (guess.words == null) return Response()
         val guessPhrase = guess.words!!.joinToString(separator = " ")
 
-        val riddlePhrase = riddleManager.getRiddle(id)?.phrase?.split(" ")
-        require(riddlePhrase != null) { "Given id doesn't exist in the system" }
+        val riddlePhrase = riddleManager.getRiddle(id).phrase.split(" ")
 
         val result = mutableListOf<Pair<String, String>>()
 
@@ -25,7 +24,7 @@ class RiddleService(val riddleManager: RiddleManager) {
             result += if (guessPhrase.contains(word, ignoreCase = true)) {
                 word to GuessResult.HIT.name
             } else {
-                word.toHiddenString() to GuessResult.MISSED.name
+                word.toHiddenString() to GuessResult.MISS.name
             }
         }
 
@@ -40,9 +39,15 @@ class RiddleService(val riddleManager: RiddleManager) {
         return builder.toString()
     }
 
+    fun initPhrase(id: Int) = Response(
+        riddleManager.getRiddle(id).phrase.split(" ")
+            .map { it.toHiddenString() to GuessResult.MISS.name }
+            .toList()
+    )
+
     fun iGiveUp(id: Int) = Response(
-        riddleManager.getRiddle(id)?.phrase
-            ?.split(" ")
-            ?.map { it to GuessResult.HIT.name } ?: emptyList()
+        riddleManager.getRiddle(id).phrase
+            .split(" ")
+            .map { it to GuessResult.HIT.name }
     )
 }

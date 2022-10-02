@@ -1,5 +1,6 @@
 package com.yonatankarp.ai.guess.game
 
+import kotlin.random.Random
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
-import kotlin.random.Random
 
 @Controller
 class RiddleController(
@@ -30,37 +30,41 @@ class RiddleController(
         log.info("Reading riddle id: $riddleIndex")
         model.addAttribute("guess", Guess(listOf("Enter a word...")))
         model.addAttribute("riddle", riddleManager.getRiddle(riddleIndex))
+        model.addAttribute("results", riddleService.initPhrase(riddleIndex))
         return "index"
     }
 
     @RequestMapping(value = ["/{id}/i-give-up"])
     fun iGiveUp(@PathVariable id: Int, model: Model): String {
-        log.info("Giving up on riddle id: $id")
+        val riddleId = id.toRiddleId()
+        log.info("Giving up on riddle id: $riddleId")
         model.addAttribute("guess", Guess(listOf()))
-        model.addAttribute("riddle", riddleManager.getRiddle(id))
-        model.addAttribute("results", riddleService.iGiveUp(id))
+        model.addAttribute("riddle", riddleManager.getRiddle(riddleId))
+        model.addAttribute("results", riddleService.iGiveUp(riddleId))
         return "index"
     }
 
     @GetMapping(value = ["/{id}"], produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
-    fun getImage(@PathVariable id: Int) = riddleService.getImage(id)
-
-    @RequestMapping(value = ["/{id}"])
-    fun getRiddle(@PathVariable id: Int, model: Model): String {
-        model.addAttribute("riddle", riddleManager.getRiddle(id))
-        return "index"
-    }
+    fun getImage(@PathVariable id: Int) = riddleService.getImage(id.toRiddleId())
 
     @PostMapping("/{id}/guess")
     fun submitGuess(@PathVariable id: Int, @ModelAttribute guess: Guess, model: Model): String {
-        log.info("Guess for id $id is ${guess.words}")
-        riddleService.handleGuess(id, guess)
+        val riddleId = id.toRiddleId()
+        log.info("Guess for id $riddleId is ${guess.words}")
+        riddleService.handleGuess(riddleId, guess)
             .let {
-                model.addAttribute("riddle", riddleManager.getRiddle(id))
+                model.addAttribute("riddle", riddleManager.getRiddle(riddleId))
                 model.addAttribute("guess", guess)
                 model.addAttribute("results", it)
             }
         return "index"
+    }
+
+    private fun Int.toRiddleId() = (this % MAX_NUMBER_OF_RIDDLES) + 1
+
+    @GetMapping("favicon.ico")
+    @ResponseBody
+    fun favicon() {
     }
 }

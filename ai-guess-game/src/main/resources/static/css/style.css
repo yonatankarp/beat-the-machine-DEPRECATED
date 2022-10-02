@@ -3,7 +3,7 @@ div.hit {
     display: inline;
 }
 
-div.missed {
+div.miss {
     color: #cc0000;
     display: inline;
 }

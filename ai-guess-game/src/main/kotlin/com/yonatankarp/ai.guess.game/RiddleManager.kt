@@ -11,9 +11,9 @@ class RiddleManager {
         3 to Riddle(3, "the quiet before the storm", loadImage(3))
     )
 
-    fun getImage(id: Int) = riddles[id]?.image
+    fun getImage(id: Int) = riddles[id]!!.image
 
-    fun getRiddle(id: Int) = riddles[id]
+    fun getRiddle(id: Int) = riddles[id]!!
 
     private fun loadImage(id: Int) =
         javaClass.getResourceAsStream("/static/images/$id.png")!!.readBytes()

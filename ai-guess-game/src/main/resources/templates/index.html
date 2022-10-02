@@ -47,6 +47,7 @@
         <div class="col-12">
             <button class="btn btn-primary button-margin" type="submit">Submit</button>
             <button class="btn button-margin" type="submit" th:formaction="@{'/' + ${riddle.id} + '/i-give-up'}">I give up!</button>
+            <button class="btn button-margin" type="submit" th:formaction="@{'/' + ${riddle.id + 1} + '/guess'}">Next</button>
         </div>
     </form>
 </div>
