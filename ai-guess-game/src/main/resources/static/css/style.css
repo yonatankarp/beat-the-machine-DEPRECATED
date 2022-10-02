@@ -1,0 +1,28 @@
+div.correct {
+    color: #009933;
+    display: inline;
+}
+
+div.wrong_location {
+    color: #cc9900;
+    display: inline;
+}
+
+div.missed {
+    color: #cc0000;
+    display: inline;
+}
+
+.riddle-image-padding {
+    padding: 2% 0 2% 0;
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.button-margin {
+    margin: 1% 0 1% 0
+}

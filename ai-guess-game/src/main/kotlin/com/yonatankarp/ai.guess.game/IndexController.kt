@@ -25,7 +25,7 @@ class IndexController(
     fun index(model: Model): String {
         val riddleIndex = Random.nextInt(from = 1, until = MAX_NUMBER_OF_RIDDLES + 1)
         log.info("Reading riddle id: $riddleIndex")
-        model.addAttribute("guess", Guess())
+        model.addAttribute("guess", Guess("Enter a word..."))
         model.addAttribute("riddle", riddleManager.getRiddle(riddleIndex))
         return "index"
     }
