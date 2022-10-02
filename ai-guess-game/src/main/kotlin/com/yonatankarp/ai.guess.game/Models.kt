@@ -1,11 +1,10 @@
 package com.yonatankarp.ai.guess.game
 
-class Guess(var phrase: String? = null)
+class Guess(var words: List<String>? = null)
 
-data class Response(val state: Map<String, String>)
+data class Response(val state: List<Pair<String, String>> = emptyList(), val guessedWords: List<String> = emptyList())
 
 enum class GuessResult {
-    CORRECT,
-    WRONG_LOCATION,
+    HIT,
     MISSED
 }

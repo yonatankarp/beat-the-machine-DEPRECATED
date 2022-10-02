@@ -1,10 +1,5 @@
-div.correct {
+div.hit {
     color: #009933;
-    display: inline;
-}
-
-div.wrong_location {
-    color: #cc9900;
     display: inline;
 }
 
@@ -25,4 +20,8 @@ div.missed {
 
 .button-margin {
     margin: 1% 0 1% 0
+}
+
+.phrase {
+    display: inline;
 }

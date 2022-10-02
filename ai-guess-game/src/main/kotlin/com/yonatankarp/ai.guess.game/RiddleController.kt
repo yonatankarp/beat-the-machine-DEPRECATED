@@ -28,8 +28,17 @@ class RiddleController(
     fun index(model: Model): String {
         val riddleIndex = Random.nextInt(from = 1, until = MAX_NUMBER_OF_RIDDLES + 1)
         log.info("Reading riddle id: $riddleIndex")
-        model.addAttribute("guess", Guess("Enter a word..."))
+        model.addAttribute("guess", Guess(listOf("Enter a word...")))
         model.addAttribute("riddle", riddleManager.getRiddle(riddleIndex))
+        return "index"
+    }
+
+    @RequestMapping(value = ["/{id}/i-give-up"])
+    fun iGiveUp(@PathVariable id: Int, model: Model): String {
+        log.info("Giving up on riddle id: $id")
+        model.addAttribute("guess", Guess(listOf()))
+        model.addAttribute("riddle", riddleManager.getRiddle(id))
+        model.addAttribute("results", riddleService.iGiveUp(id))
         return "index"
     }
 
@@ -45,7 +54,7 @@ class RiddleController(
 
     @PostMapping("/{id}/guess")
     fun submitGuess(@PathVariable id: Int, @ModelAttribute guess: Guess, model: Model): String {
-        log.info("Guess for id $id is ${guess.phrase}")
+        log.info("Guess for id $id is ${guess.words}")
         riddleService.handleGuess(id, guess)
             .let {
                 model.addAttribute("riddle", riddleManager.getRiddle(id))

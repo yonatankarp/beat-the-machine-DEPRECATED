@@ -32,20 +32,21 @@
     <form action="#" th:action="@{'/' + ${riddle.id} + '/guess'}" th:object="${guess}" method="post">
         <div class="mb-3">
             <label class="form-label">Guess:</label>
-            <input type="text" th:field="*{phrase}" class="form-control form-control-lg"/>
+            <input type="text" th:field="*{words}" th:text="${result?.guessedWords}" class="form-control form-control-lg"/>
         </div>
         <div class="mb-3">
             <label class="form-label">Phrase:</label>
             <div th:if="${results != null}">
                 <tbody>
                 <tr th:each="entry : ${results.state}">
-                    <div th:text="${entry.key}" th:class="${entry.value}">keyvalue</div>
+                    <div th:text="${entry.first}" th:class="${entry.second}" class="phrase">keyvalue</div>
                 </tr>
                 <tbody>
             </div>
         </div>
         <div class="col-12">
-            <button class="btn btn-primary button-margin" type="submit">Submit form</button>
+            <button class="btn btn-primary button-margin" type="submit">Submit</button>
+            <button class="btn button-margin" type="submit" th:formaction="@{'/' + ${riddle.id} + '/i-give-up'}">I give up!</button>
         </div>
     </form>
 </div>
