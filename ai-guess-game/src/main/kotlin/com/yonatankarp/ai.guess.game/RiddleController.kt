@@ -1,6 +1,5 @@
 package com.yonatankarp.ai.guess.game
 
-import kotlin.random.Random
 import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseBody
+import kotlin.random.Random
 
 @Controller
 class RiddleController(
@@ -20,13 +20,11 @@ class RiddleController(
 
     companion object {
         private val log = LoggerFactory.getLogger(RiddleController::class.java)
-
-        private const val MAX_NUMBER_OF_RIDDLES = 3
     }
 
     @RequestMapping(value = ["/", "index", "index.html"])
     fun index(model: Model): String {
-        val riddleIndex = Random.nextInt(from = 1, until = MAX_NUMBER_OF_RIDDLES + 1)
+        val riddleIndex = Random.nextInt(from = 0, until = riddleManager.numberOfRiddles + 1)
         log.info("Reading riddle id: $riddleIndex")
         model.addAttribute("guess", Guess(listOf("Enter a word...")))
         model.addAttribute("riddle", riddleManager.getRiddle(riddleIndex))
@@ -61,7 +59,7 @@ class RiddleController(
         return "index"
     }
 
-    private fun Int.toRiddleId() = (this % MAX_NUMBER_OF_RIDDLES) + 1
+    private fun Int.toRiddleId() = this % (riddleManager.numberOfRiddles)
 
     @GetMapping("favicon.ico")
     @ResponseBody
