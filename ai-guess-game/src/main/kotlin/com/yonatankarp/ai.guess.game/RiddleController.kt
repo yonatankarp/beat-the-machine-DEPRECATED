@@ -24,7 +24,7 @@ class RiddleController(
 
     @RequestMapping(value = ["/", "index", "index.html"])
     fun index(model: Model): String {
-        val riddleIndex = Random.nextInt(from = 0, until = riddleManager.numberOfRiddles + 1)
+        val riddleIndex = Random.nextInt(from = 0, until = riddleManager.numberOfRiddles)
         log.info("Reading riddle id: $riddleIndex")
         model.addAttribute("guess", Guess(listOf("Enter a word...")))
         model.addAttribute("riddle", riddleManager.getRiddle(riddleIndex))
@@ -39,7 +39,7 @@ class RiddleController(
         model.addAttribute("guess", Guess(listOf()))
         model.addAttribute("riddle", riddleManager.getRiddle(riddleId))
         model.addAttribute("results", riddleService.iGiveUp(riddleId))
-        return "index"
+        return "game"
     }
 
     @GetMapping(value = ["/{id}"], produces = [MediaType.IMAGE_PNG_VALUE])
@@ -56,7 +56,7 @@ class RiddleController(
                 model.addAttribute("guess", guess)
                 model.addAttribute("results", it)
             }
-        return "index"
+        return "game"
     }
 
     private fun Int.toRiddleId() = this % (riddleManager.numberOfRiddles)

@@ -25,3 +25,9 @@ div.miss {
 .phrase {
     display: inline;
 }
+
+.instructions {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+}

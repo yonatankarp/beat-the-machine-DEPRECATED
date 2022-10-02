@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Guessing game</title>
+        <link th:href="@{/css/style.css}" rel="stylesheet"/>
+
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+              integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+              crossorigin="anonymous"
+              th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}">
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+                crossorigin="anonymous"
+                th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+        <script src="jquery-3.5.1.min.js" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    </head>
+</head>
+<body>
+<!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Riddle"*/-->
+<div class="center riddle-image-padding">
+    <img th:src="@{'/' + ${riddle.id}}" class="img-thumbnail" width="500"/>
+</div>
+<div class="center">
+    <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Guess"*/-->
+    <form action="#" th:action="@{'/' + ${riddle.id} + '/guess'}" th:object="${guess}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Guess:</label>
+            <input type="text" th:field="*{words}" th:text="${result?.guessedWords}" class="form-control form-control-lg"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phrase:</label>
+            <div th:if="${results != null}">
+                <tbody>
+                <tr th:each="entry : ${results.state}">
+                    <div th:text="${entry.first}" th:class="${entry.second}" class="phrase">keyvalue</div>
+                </tr>
+                <tbody>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary btn-lg button-margin" type="submit">Submit</button>
+            <button class="btn btn-danger btn-lg button-margin" type="submit" th:formaction="@{'/' + ${riddle.id} + '/i-give-up'}">I give up!</button>
+            <button class="btn btn-lg button-margin" type="submit" th:formaction="@{'/' + ${riddle.id + 1} + '/guess'}">Next</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

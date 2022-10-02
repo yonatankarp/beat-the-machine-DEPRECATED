@@ -13,10 +13,9 @@ class RiddleService(val riddleManager: RiddleManager) {
     fun getImage(id: Int) = riddleManager.getImage(id)
 
     fun handleGuess(id: Int, guess: Guess): Response {
-        if (guess.words == null) return Response()
-        val guessPhrase = guess.words!!.joinToString(separator = " ")
-
         val riddlePhrase = riddleManager.getRiddle(id).phrase.split(" ")
+        if (guess.words == null) return Response(riddlePhrase.map { it.toHiddenString() to GuessResult.MISS.name })
+        val guessPhrase = guess.words!!.joinToString(separator = " ")
 
         val result = mutableListOf<Pair<String, String>>()
 
