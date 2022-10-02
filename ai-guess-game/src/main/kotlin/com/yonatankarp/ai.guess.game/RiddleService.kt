@@ -1,5 +1,6 @@
 package com.yonatankarp.ai.guess.game
 
+import com.yonatankarp.ai.guess.game.GuessResult.CORRECT
 import com.yonatankarp.ai.guess.game.GuessResult.MISSED
 import com.yonatankarp.ai.guess.game.GuessResult.WRONG_LOCATION
 import org.slf4j.LoggerFactory
@@ -24,10 +25,10 @@ class RiddleService(val riddleManager: RiddleManager) {
         guess.phrase?.split(" ")?.forEachIndexed { index, word ->
             if (phrase.contains(word.lowercase())) {
                 result[word] =
-                    if (phraseInIndex[index] == word.lowercase()) "green" // GuessResult.CORRECT
-                    else "yellow" //WRONG_LOCATION
+                    if (phraseInIndex[index] == word.lowercase()) CORRECT.name.lowercase()
+                    else WRONG_LOCATION.name.lowercase()
             } else {
-                result[word] = "black" //MISSED
+                result[word] = MISSED.name.lowercase()
             }
         }
 

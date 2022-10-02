@@ -7,6 +7,22 @@
     <head>
         <meta charset="UTF-8">
         <title>Guessing game</title>
+        <style>
+            div.correct {
+                color: #009933;
+                display: inline;
+            }
+
+            div.wrong_location {
+                color: #cc9900;
+                display: inline;
+            }
+
+            div.missed {
+                color: #cc0000;
+                display: inline;
+            }
+        </style>
     </head>
 </head>
 <body>
@@ -16,18 +32,19 @@
 
     <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Guess"*/-->
     <form action="#" th:action="@{'/' + ${riddle.id} + '/guess'}" th:object="${guess}" method="post">
-        <p>Phrase: <input type="text" th:field="*{phrase}" /></p>
+        <p>Phrase: <input type="text" th:field="*{phrase}"/></p>
         <div th:if="${results != null}">
-<!--            <tr th:each="entry : ${results.state}">-->
-<!--                <td th:style="${entry.value == T(com.yonatankarp.ai.guess.game.GuessResult).CORRECT ? 'color: green;' : 'color: yellow;'}" th:text="${entry.key}"></td>-->
-<!--            </tr>-->
+            <!--            <tr th:each="entry : ${results.state}">-->
+            <!--                <td th:style="${entry.value == T(com.yonatankarp.ai.guess.game.GuessResult).CORRECT ? 'color: green;' : 'color: yellow;'}" th:text="${entry.key}"></td>-->
+            <!--            </tr>-->
 
-            <tr th:each="entry : ${results.state}">
-                <td th:text="${entry.key}" th:style="${entry.value}">keyvalue</td>
-                <td th:text="${entry.value}">num</td>
-            </tr>
+            <tbody>
+                <tr th:each="entry : ${results.state}">
+                    <div th:text="${entry.key}" th:class="${entry.value}">keyvalue</div>
+                </tr>
+            <tbody>
         </div>
-        <p><input type="submit" value="Submit" /></p>
+        <p><input type="submit" value="Submit"/></p>
     </form>
 </center>
 </body>
