@@ -25,8 +25,11 @@ class RiddleService(val riddleManager: RiddleManager) {
         guess.phrase?.split(" ")?.forEachIndexed { index, word ->
             if (phrase.contains(word.lowercase())) {
                 result[word] =
-                    if (index < phraseInIndex.size && phraseInIndex[index] == word.lowercase()) CORRECT.name.lowercase()
-                    else WRONG_LOCATION.name.lowercase()
+                    if (index < phraseInIndex.size && phraseInIndex[index] == word.lowercase()) {
+                        CORRECT.name.lowercase()
+                    } else {
+                        WRONG_LOCATION.name.lowercase()
+                    }
             } else {
                 result[word] = MISSED.name.lowercase()
             }

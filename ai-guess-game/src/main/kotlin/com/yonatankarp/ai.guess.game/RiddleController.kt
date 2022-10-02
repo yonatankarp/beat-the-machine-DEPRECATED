@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
 class RiddleController(private val service: RiddleService) {
     @GetMapping(value = ["/{id}"], produces = [MediaType.IMAGE_PNG_VALUE])
