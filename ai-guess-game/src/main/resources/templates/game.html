@@ -35,11 +35,11 @@
             <input type="text" th:field="*{words}" th:text="${result?.guessedWords}" class="form-control form-control-lg"/>
         </div>
         <div class="mb-3">
-            <label class="form-label">Phrase:</label>
-            <div th:if="${results != null}">
+            <label class="form-label">Prompt:</label>
+            <div>
                 <tbody>
-                <tr th:each="entry : ${results.state}">
-                    <div th:text="${entry.first}" th:class="${entry.second}" class="phrase">keyvalue</div>
+                <tr th:each="word : ${response.state}">
+                    <div th:text="${word.first}" th:class="${word.second}" class="prompt">prompt</div>
                 </tr>
                 <tbody>
             </div>

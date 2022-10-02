@@ -17,7 +17,6 @@ class RiddleController(
     val riddleService: RiddleService,
     val riddleManager: RiddleManager
 ) {
-
     companion object {
         private val log = LoggerFactory.getLogger(RiddleController::class.java)
     }
@@ -26,19 +25,23 @@ class RiddleController(
     fun index(model: Model): String {
         val riddleIndex = Random.nextInt(from = 0, until = riddleManager.numberOfRiddles)
         log.info("Reading riddle id: $riddleIndex")
-        model.addAttribute("guess", Guess(listOf("Enter a word...")))
-        model.addAttribute("riddle", riddleManager.getRiddle(riddleIndex))
-        model.addAttribute("results", riddleService.initPhrase(riddleIndex))
+        riddleManager.getRiddle(riddleIndex).let {
+            model.addAttribute("guess", Guess(listOf("Enter a word...")))
+            model.addAttribute("riddle", it)
+            model.addAttribute("response", it.initPrompt())
+        }
         return "index"
     }
 
     @RequestMapping(value = ["/{id}/i-give-up"])
     fun iGiveUp(@PathVariable id: Int, model: Model): String {
-        val riddleId = id.toRiddleId()
-        log.info("Giving up on riddle id: $riddleId")
-        model.addAttribute("guess", Guess(listOf()))
-        model.addAttribute("riddle", riddleManager.getRiddle(riddleId))
-        model.addAttribute("results", riddleService.iGiveUp(riddleId))
+        log.info("Giving up on riddle id: $id")
+        riddleManager.getRiddle(id.toRiddleId()).let {
+            model.addAttribute("guess", Guess(listOf()))
+            model.addAttribute("riddle", it)
+            model.addAttribute("response", it.giveUp())
+        }
+
         return "game"
     }
 
@@ -54,7 +57,7 @@ class RiddleController(
             .let {
                 model.addAttribute("riddle", riddleManager.getRiddle(riddleId))
                 model.addAttribute("guess", guess)
-                model.addAttribute("results", it)
+                model.addAttribute("response", it)
             }
         return "game"
     }

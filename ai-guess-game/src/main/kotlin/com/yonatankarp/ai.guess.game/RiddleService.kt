@@ -13,8 +13,10 @@ class RiddleService(val riddleManager: RiddleManager) {
     fun getImage(id: Int) = riddleManager.getImage(id)
 
     fun handleGuess(id: Int, guess: Guess): Response {
-        val riddlePhrase = riddleManager.getRiddle(id).phrase.split(" ")
-        if (guess.words == null) return Response(riddlePhrase.map { it.toHiddenString() to GuessResult.MISS.name })
+        val riddle = riddleManager.getRiddle(id)
+        if (guess.words == null) return riddle.initPrompt()
+
+        val riddlePhrase = riddle.prompt.split(" ")
         val guessPhrase = guess.words!!.joinToString(separator = " ")
 
         val result = mutableListOf<Pair<String, String>>()
@@ -31,22 +33,4 @@ class RiddleService(val riddleManager: RiddleManager) {
 
         return Response(result, guess.words!!)
     }
-
-    private fun String.toHiddenString(): String {
-        val builder = StringBuilder()
-        for (i in 0..(this.length)) builder.append("-")
-        return builder.toString()
-    }
-
-    fun initPhrase(id: Int) = Response(
-        riddleManager.getRiddle(id).phrase.split(" ")
-            .map { it.toHiddenString() to GuessResult.MISS.name }
-            .toList()
-    )
-
-    fun iGiveUp(id: Int) = Response(
-        riddleManager.getRiddle(id).phrase
-            .split(" ")
-            .map { it to GuessResult.HIT.name }
-    )
 }
