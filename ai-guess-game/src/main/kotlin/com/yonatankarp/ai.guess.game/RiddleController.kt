@@ -1,7 +1,6 @@
 package com.yonatankarp.ai.guess.game
 
 import org.slf4j.LoggerFactory
-import org.springframework.http.MediaType
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -44,10 +43,6 @@ class RiddleController(
 
         return "game"
     }
-
-    @GetMapping(value = ["/{id}"], produces = [MediaType.IMAGE_PNG_VALUE])
-    @ResponseBody
-    fun getImage(@PathVariable id: Int) = riddleService.getImage(id.toRiddleId())
 
     @PostMapping("/{id}/guess")
     fun submitGuess(@PathVariable id: Int, @ModelAttribute guess: Guess, model: Model): String {

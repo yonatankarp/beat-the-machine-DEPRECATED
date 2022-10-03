@@ -10,8 +10,6 @@ class RiddleService(val riddleManager: RiddleManager) {
         private val log = LoggerFactory.getLogger(RiddleService::class.java)
     }
 
-    fun getImage(id: Int) = riddleManager.getImage(id)
-
     fun handleGuess(id: Int, guess: Guess): Response {
         val riddle = riddleManager.getRiddle(id)
         if (guess.words == null) return riddle.initPrompt()

@@ -25,7 +25,7 @@
 <body>
 <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Riddle"*/-->
 <div class="center riddle-image-padding">
-    <img th:src="@{'/' + ${riddle.id}}" class="img-thumbnail" width="500"/>
+    <img th:src="${riddle.url}" class="img-thumbnail" width="500"/>
 </div>
 <div class="center">
     <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Guess"*/-->
