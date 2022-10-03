@@ -1,17 +1,22 @@
-package com.yonatankarp.ai.guess.game
+package com.yonatankarp.ai.guess.game.services
 
+import com.yonatankarp.ai.guess.game.models.Guess
+import com.yonatankarp.ai.guess.game.models.GuessResult.HIT
+import com.yonatankarp.ai.guess.game.models.GuessResult.MISS
+import com.yonatankarp.ai.guess.game.models.Response
+import com.yonatankarp.ai.guess.game.utils.toHiddenString
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
-class RiddleService(val riddleManager: RiddleManager) {
+class RiddleService {
 
     companion object {
         private val log = LoggerFactory.getLogger(RiddleService::class.java)
     }
 
     fun handleGuess(id: Int, guess: Guess): Response {
-        val riddle = riddleManager.riddles[id]
+        val riddle = RiddleManager.riddles[id]
         if (guess.words == null) return riddle.initPrompt()
 
         val riddlePhrase = riddle.prompt.split(" ")
@@ -21,9 +26,9 @@ class RiddleService(val riddleManager: RiddleManager) {
 
         riddlePhrase.forEach { word ->
             result += if (guessPhrase.contains(word, ignoreCase = true)) {
-                word to GuessResult.HIT.name
+                word to HIT.name
             } else {
-                word.toHiddenString() to GuessResult.MISS.name
+                word.toHiddenString() to MISS.name
             }
         }
 

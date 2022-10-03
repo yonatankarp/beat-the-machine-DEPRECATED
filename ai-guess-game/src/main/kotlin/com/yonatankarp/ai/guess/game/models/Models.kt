@@ -1,6 +1,6 @@
-package com.yonatankarp.ai.guess.game
+package com.yonatankarp.ai.guess.game.models
 
-class Guess(var words: List<String>? = null)
+data class Guess(var words: List<String>? = null)
 
 data class Response(val state: List<Pair<String, String>> = emptyList(), val guessedWords: List<String> = emptyList())
 

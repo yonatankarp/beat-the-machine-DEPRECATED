@@ -23,12 +23,12 @@
     </head>
 </head>
 <body>
-<!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Riddle"*/-->
+<!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.services.Riddle"*/-->
 <div class="center riddle-image-padding">
     <img th:src="${riddle.url}" class="img-thumbnail" width="500"/>
 </div>
 <div class="center">
-    <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.Guess"*/-->
+    <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.models.Guess"*/-->
     <form action="#" th:action="@{'/' + ${riddle.id} + '/guess'}" th:object="${guess}" method="post">
         <div class="mb-3">
             <label class="form-label">Guess:</label>

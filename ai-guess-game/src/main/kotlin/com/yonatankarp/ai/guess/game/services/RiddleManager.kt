@@ -1,9 +1,9 @@
-package com.yonatankarp.ai.guess.game
+package com.yonatankarp.ai.guess.game.services
 
-import org.springframework.stereotype.Component
+import com.yonatankarp.ai.guess.game.models.Riddle
+import com.yonatankarp.ai.guess.game.utils.toHiddenString
 
-@Component
-class RiddleManager {
+object RiddleManager {
 
     val riddles = listOf(
         "man stands on a man" to "https://s3.amazonaws.com/ai.protogenes/art/28b9da08-4282-11ed-8be2-ee31c059bf00.png",
@@ -22,27 +22,4 @@ class RiddleManager {
 
     val numberOfRiddles: Int
         get() = riddles.size
-}
-
-data class Riddle(val id: Int, val startPrompt: String, val prompt: String, val url: String) {
-    fun giveUp() = Response(
-        this.prompt
-            .split(" ")
-            .map { it to GuessResult.HIT.name }
-    )
-
-    fun initPrompt() = Response(
-        this.prompt
-            .split(" ")
-            .map { it.toHiddenString() to GuessResult.MISS.name }
-            .toList()
-    )
-}
-
-fun String.toHiddenString(): String {
-    val builder = StringBuilder()
-    for (c in this) {
-        builder.append(if (c != ' ') "-" else " ")
-    }
-    return builder.toString()
 }

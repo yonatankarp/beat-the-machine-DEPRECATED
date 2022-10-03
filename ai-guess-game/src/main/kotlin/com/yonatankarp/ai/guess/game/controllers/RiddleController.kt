@@ -1,20 +1,20 @@
-package com.yonatankarp.ai.guess.game
+package com.yonatankarp.ai.guess.game.controllers
 
+import com.yonatankarp.ai.guess.game.services.RiddleManager
+import com.yonatankarp.ai.guess.game.models.Guess
+import com.yonatankarp.ai.guess.game.services.RiddleService
+import kotlin.random.Random
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
-import kotlin.random.Random
 
 @Controller
 class RiddleController(
     val riddleService: RiddleService,
-    val riddleManager: RiddleManager
 ) {
     companion object {
         private val log = LoggerFactory.getLogger(RiddleController::class.java)
@@ -22,10 +22,10 @@ class RiddleController(
 
     @RequestMapping(value = ["/", "index", "index.html"])
     fun index(model: Model): String {
-        val riddleIndex = Random.nextInt(from = 0, until = riddleManager.numberOfRiddles)
+        val riddleIndex = Random.nextInt(from = 0, until = RiddleManager.numberOfRiddles)
         log.info("Reading riddle id: $riddleIndex")
-        riddleManager.riddles[riddleIndex].let {
-            model.addAttribute("guess", Guess(listOf("Enter a word...")))
+        RiddleManager.riddles[riddleIndex].let {
+            model.addAttribute("guess", Guess(emptyList()))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.initPrompt())
         }
@@ -35,7 +35,7 @@ class RiddleController(
     @RequestMapping(value = ["/{id}/i-give-up"])
     fun iGiveUp(@PathVariable id: Int, model: Model): String {
         log.info("Giving up on riddle id: $id")
-        riddleManager.riddles[id.toRiddleId()].let {
+        RiddleManager.riddles[id.toRiddleId()].let {
             model.addAttribute("guess", Guess(listOf()))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.giveUp())
@@ -50,17 +50,12 @@ class RiddleController(
         log.info("Guess for id $riddleId is ${guess.words}")
         riddleService.handleGuess(riddleId, guess)
             .let {
-                model.addAttribute("riddle", riddleManager.riddles[riddleId])
+                model.addAttribute("riddle", RiddleManager.riddles[riddleId])
                 model.addAttribute("guess", guess)
                 model.addAttribute("response", it)
             }
         return "game"
     }
 
-    private fun Int.toRiddleId() = this % (riddleManager.numberOfRiddles)
-
-    @GetMapping("favicon.ico")
-    @ResponseBody
-    fun favicon() {
-    }
+    private fun Int.toRiddleId() = this % (RiddleManager.numberOfRiddles)
 }
