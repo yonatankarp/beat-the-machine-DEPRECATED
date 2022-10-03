@@ -6,10 +6,30 @@ import org.springframework.stereotype.Component
 class RiddleManager {
 
     private val riddles: Array<Riddle> = arrayOf(
-        Riddle(id = 0, startPrompt = "--- ------ -- - ---", prompt = "man stands on a man", image = loadImage(0)),
-        Riddle(id = 1, startPrompt = "------ -- ----", prompt = "dolphin on fire", image = loadImage(1)),
-        Riddle(id = 2, startPrompt = "-------- ------ --- ----", prompt = "astronaut eating the moon", image = loadImage(2)),
-        Riddle(id = 3, startPrompt = "--- ----- ------ --- -- ---", prompt = "the quiet before the storm", image = loadImage(3))
+        Riddle(
+            id = 0,
+            startPrompt = "man stands on a man".toHiddenString(),
+            prompt = "man stands on a man",
+            image = loadImage(0)
+        ),
+        Riddle(
+            id = 1,
+            startPrompt = "dolphin on fire".toHiddenString(),
+            prompt = "dolphin on fire",
+            image = loadImage(1)
+        ),
+        Riddle(
+            id = 2,
+            startPrompt = "astronaut eating the moon".toHiddenString(),
+            prompt = "astronaut eating the moon",
+            image = loadImage(2)
+        ),
+        Riddle(
+            id = 3,
+            startPrompt = "the quiet before the storm".toHiddenString(),
+            prompt = "the quiet before the storm",
+            image = loadImage(3)
+        )
     )
 
     val numberOfRiddles: Int
@@ -40,6 +60,8 @@ data class Riddle(val id: Int, val startPrompt: String, val prompt: String, val 
 
 fun String.toHiddenString(): String {
     val builder = StringBuilder()
-    for (i in 0..(this.length)) builder.append("-")
+    for(c in this) {
+        builder.append(if(c != ' ') "-" else " ")
+    }
     return builder.toString()
 }
