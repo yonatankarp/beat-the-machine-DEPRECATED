@@ -11,7 +11,7 @@ class RiddleService(val riddleManager: RiddleManager) {
     }
 
     fun handleGuess(id: Int, guess: Guess): Response {
-        val riddle = riddleManager.getRiddle(id)
+        val riddle = riddleManager.riddles[id]
         if (guess.words == null) return riddle.initPrompt()
 
         val riddlePhrase = riddle.prompt.split(" ")

@@ -24,7 +24,7 @@ class RiddleController(
     fun index(model: Model): String {
         val riddleIndex = Random.nextInt(from = 0, until = riddleManager.numberOfRiddles)
         log.info("Reading riddle id: $riddleIndex")
-        riddleManager.getRiddle(riddleIndex).let {
+        riddleManager.riddles[riddleIndex].let {
             model.addAttribute("guess", Guess(listOf("Enter a word...")))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.initPrompt())
@@ -35,7 +35,7 @@ class RiddleController(
     @RequestMapping(value = ["/{id}/i-give-up"])
     fun iGiveUp(@PathVariable id: Int, model: Model): String {
         log.info("Giving up on riddle id: $id")
-        riddleManager.getRiddle(id.toRiddleId()).let {
+        riddleManager.riddles[id.toRiddleId()].let {
             model.addAttribute("guess", Guess(listOf()))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.giveUp())
@@ -50,7 +50,7 @@ class RiddleController(
         log.info("Guess for id $riddleId is ${guess.words}")
         riddleService.handleGuess(riddleId, guess)
             .let {
-                model.addAttribute("riddle", riddleManager.getRiddle(riddleId))
+                model.addAttribute("riddle", riddleManager.riddles[riddleId])
                 model.addAttribute("guess", guess)
                 model.addAttribute("response", it)
             }
