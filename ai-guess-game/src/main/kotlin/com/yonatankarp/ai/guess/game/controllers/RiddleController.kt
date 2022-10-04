@@ -30,7 +30,7 @@ class RiddleController(
         return "index"
     }
 
-    @GetMapping(value = ["/{id}/i-give-up"])
+    @PostMapping(value = ["/{id}/i-give-up"])
     fun iGiveUp(@PathVariable id: Int, model: Model): String {
         log.info("Giving up on riddle id: $id")
         riddleService.getRiddle(id.toRiddleId()).let {
