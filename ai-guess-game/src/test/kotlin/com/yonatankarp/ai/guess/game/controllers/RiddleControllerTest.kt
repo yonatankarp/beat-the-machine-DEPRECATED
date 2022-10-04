@@ -63,7 +63,7 @@ class RiddleControllerTest {
         val riddle = Riddle(riddleId, "- --- -- --- ----", "a man on the moon", "some url")
         every { service.getRiddle(any()) } returns riddle
 
-        mockMvc.get("/$riddleId/i-give-up")
+        mockMvc.post("/$riddleId/i-give-up")
             .andExpect {
                 status { isOk() }
                 view { name("game") }
