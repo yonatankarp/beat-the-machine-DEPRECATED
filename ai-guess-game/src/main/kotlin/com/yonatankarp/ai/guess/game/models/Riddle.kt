@@ -1,20 +1,16 @@
 package com.yonatankarp.ai.guess.game.models
 
-import com.yonatankarp.ai.guess.game.models.GuessResult.HIT
-import com.yonatankarp.ai.guess.game.models.GuessResult.MISS
-import com.yonatankarp.ai.guess.game.utils.toHiddenString
+import com.yonatankarp.ai.guess.game.models.Guess.GuessResult.MISS
 
 data class Riddle(val id: Int, val startPrompt: String, val prompt: String, val url: String) {
-    fun giveUp() = Response(
+    fun giveUp() =
         this.prompt
             .split(" ")
-            .map { it to HIT.name }
-    )
+            .map { it to MISS.name }
 
-    fun initPrompt() = Response(
-        this.prompt
+    fun initPrompt() =
+        this.startPrompt
             .split(" ")
-            .map { it.toHiddenString() to MISS.name }
+            .map { it to MISS.name }
             .toList()
-    )
 }
