@@ -39,7 +39,7 @@
             <div>
                 <tbody>
                 <tr th:each="word : ${response}">
-                    <div th:text="${word.first}" th:class="${word.second}" class="prompt">prompt</div>
+                    <div th:text="${word.first}" th:class="@{'prompt ' + ${word.second}}">prompt</div>
                 </tr>
                 <tbody>
             </div>

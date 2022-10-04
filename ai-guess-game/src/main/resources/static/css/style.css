@@ -24,6 +24,7 @@ div.miss {
 
 .prompt {
     display: inline;
+    font-size: 1.5em;
 }
 
 .instructions {
