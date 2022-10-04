@@ -1,30 +1,28 @@
 package com.yonatankarp.ai.guess.game.controllers
 
-import com.yonatankarp.ai.guess.game.services.RiddleManager
 import com.yonatankarp.ai.guess.game.models.Guess
+import com.yonatankarp.ai.guess.game.services.RiddleManager
 import com.yonatankarp.ai.guess.game.services.RiddleService
-import kotlin.random.Random
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 class RiddleController(
-    val riddleService: RiddleService,
+    val riddleService: RiddleService
 ) {
     companion object {
         private val log = LoggerFactory.getLogger(RiddleController::class.java)
     }
 
-    @RequestMapping(value = ["/", "index", "index.html"])
+    @GetMapping(value = ["/", "index", "index.html"])
     fun index(model: Model): String {
-        val riddleIndex = Random.nextInt(from = 0, until = RiddleManager.numberOfRiddles)
-        log.info("Reading riddle id: $riddleIndex")
-        RiddleManager.riddles[riddleIndex].let {
+        log.info("Loading index...")
+        riddleService.getRandomRiddle().let {
             model.addAttribute("guess", Guess(emptyList()))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.initPrompt())
@@ -32,10 +30,10 @@ class RiddleController(
         return "index"
     }
 
-    @RequestMapping(value = ["/{id}/i-give-up"])
+    @GetMapping(value = ["/{id}/i-give-up"])
     fun iGiveUp(@PathVariable id: Int, model: Model): String {
         log.info("Giving up on riddle id: $id")
-        RiddleManager.riddles[id.toRiddleId()].let {
+        riddleService.getRiddle(id.toRiddleId()).let {
             model.addAttribute("guess", Guess(listOf()))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.giveUp())
