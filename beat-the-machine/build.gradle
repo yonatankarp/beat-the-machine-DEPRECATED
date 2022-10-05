@@ -25,13 +25,21 @@ jar {
 }
 
 dependencies {
+    // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+    // Kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    // Database
+    implementation("com.h2database:h2:2.1.214")
+    implementation("org.flywaydb:flyway-core")
+
+    // Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude group: "org.mockito", module: "mockito-core"
     }
@@ -49,3 +57,4 @@ test {
     finalizedBy jacocoTestReport
     finalizedBy pmdTest
 }
+

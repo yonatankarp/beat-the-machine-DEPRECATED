@@ -2,9 +2,8 @@ package com.yonatankarp.ai.guess.game.controllers
 
 import com.ninjasquad.springmockk.MockkBean
 import com.yonatankarp.ai.guess.game.models.Guess
-import com.yonatankarp.ai.guess.game.models.Guess.GuessResult
+import com.yonatankarp.ai.guess.game.models.Guess.GuessResult.MISS
 import com.yonatankarp.ai.guess.game.models.Riddle
-import com.yonatankarp.ai.guess.game.services.RiddleManager
 import com.yonatankarp.ai.guess.game.services.RiddleService
 import io.mockk.clearAllMocks
 import io.mockk.every
@@ -40,7 +39,7 @@ class RiddleControllerTest {
     @ParameterizedTest
     @ValueSource(strings = ["/", "/index", "/index.html"])
     fun `should return index page`(endpoint: String) {
-        val riddle = Riddle(1, "---", "cat", "some url")
+        val riddle = buildRiddle()
         every { service.getRandomRiddle() } returns riddle
 
         mockMvc.get(endpoint)
@@ -48,9 +47,9 @@ class RiddleControllerTest {
                 status { isOk() }
                 view { name("index") }
                 model {
-                    attribute("guess", Guess(emptyList()))
+                    attribute("guess", Guess())
                     attribute("riddle", riddle)
-                    attribute("response", listOf("---" to GuessResult.MISS.name))
+                    attribute("response", buildHiddenStringList())
                 }
             }
 
@@ -59,47 +58,37 @@ class RiddleControllerTest {
 
     @Test
     fun `should return current riddle with full prompt solved`() {
-        val riddleId = 3
-        val riddle = Riddle(riddleId, "- --- -- --- ----", "a man on the moon", "some url")
+        val riddle = buildRiddle()
+        every { service.getRiddle(any()) } returns riddle
+        every { service.getNumberOfRiddles() } returns Int.MAX_VALUE
         every { service.getRiddle(any()) } returns riddle
 
-        mockMvc.post("/$riddleId/i-give-up")
+        mockMvc.post("/${riddle.id}/i-give-up")
             .andExpect {
                 status { isOk() }
                 view { name("game") }
                 model {
                     attribute("guess", Guess(emptyList()))
                     attribute("riddle", riddle)
-                    attribute(
-                        "response",
-                        listOf(
-                            "a" to GuessResult.MISS.name,
-                            "man" to GuessResult.MISS.name,
-                            "on" to GuessResult.MISS.name,
-                            "the" to GuessResult.MISS.name,
-                            "moon" to GuessResult.MISS.name
-                        )
-                    )
+                    attribute("response", buildMissList())
                 }
             }
 
-        verify(exactly = 1) { service.getRiddle(riddleId) }
+        verify(exactly = 1) { service.getRiddle(riddle.id) }
+        verify(exactly = 1) { service.getNumberOfRiddles() }
+        verify(exactly = 1) { service.getRiddle(eq(riddle.id)) }
     }
 
     @Test
     fun `should submit guess`() {
-        val riddleId = 4
-        val riddle = RiddleManager.riddles[riddleId]
+        val riddle = buildRiddle()
         val guess = Guess()
-        val guessHits = listOf(
-            "dragon" to GuessResult.MISS.name,
-            "eating" to GuessResult.MISS.name,
-            "a" to GuessResult.MISS.name,
-            "cookie" to GuessResult.MISS.name
-        )
-        every { service.handleGuess(any(), any()) } returns guessHits
+        val missedGuesses = buildMissList()
+        every { service.handleGuess(any(), any()) } returns missedGuesses
+        every { service.getNumberOfRiddles() } returns Int.MAX_VALUE
+        every { service.getRiddle(any()) } returns riddle
 
-        mockMvc.post("/$riddleId/guess") {
+        mockMvc.post("/${riddle.id}/guess") {
             sessionAttrs = mapOf("guess" to guess)
         }.andExpect {
             status { isOk() }
@@ -107,13 +96,36 @@ class RiddleControllerTest {
             model {
                 attribute("guess", guess)
                 attribute("riddle", riddle)
-                attribute(
-                    "response",
-                    guessHits
-                )
+                attribute("response", missedGuesses)
             }
         }
 
-        verify(exactly = 1) { service.handleGuess(eq(riddleId), eq(guess)) }
+        verify(exactly = 1) { service.handleGuess(eq(riddle.id), eq(guess)) }
+        verify(exactly = 1) { service.getNumberOfRiddles() }
+        verify(exactly = 1) { service.getRiddle(eq(riddle.id)) }
     }
+
+    private fun buildRiddle() =
+        Riddle(
+            id = 1234567,
+            startPrompt = "- -- - ----",
+            prompt = "i am a test",
+            url = "some nice url"
+        )
+
+    private fun buildMissList() =
+        listOf(
+            "i" to MISS.name,
+            "am" to MISS.name,
+            "a" to MISS.name,
+            "test" to MISS.name
+        )
+
+    private fun buildHiddenStringList() =
+        listOf(
+            "-" to MISS.name,
+            "--" to MISS.name,
+            "-" to MISS.name,
+            "----" to MISS.name
+        )
 }

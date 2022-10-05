@@ -1,7 +1,6 @@
 package com.yonatankarp.ai.guess.game.controllers
 
 import com.yonatankarp.ai.guess.game.models.Guess
-import com.yonatankarp.ai.guess.game.services.RiddleManager
 import com.yonatankarp.ai.guess.game.services.RiddleService
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
@@ -48,12 +47,12 @@ class RiddleController(
         log.info("Guess for id $riddleId is ${guess.words}")
         riddleService.handleGuess(riddleId, guess)
             .let {
-                model.addAttribute("riddle", RiddleManager.riddles[riddleId])
+                model.addAttribute("riddle", riddleService.getRiddle(riddleId))
                 model.addAttribute("guess", guess)
                 model.addAttribute("response", it)
             }
         return "game"
     }
 
-    private fun Int.toRiddleId() = this % (RiddleManager.numberOfRiddles)
+    private fun Int.toRiddleId() = this % (riddleService.getNumberOfRiddles())
 }

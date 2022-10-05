@@ -5,3 +5,18 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+  h2:
+    console.enabled: true
+  datasource:
+    url: jdbc:h2:mem:gamedb
+    driver-class-name: org.h2.Driver
+    username: ${DB_USER:sa}
+    password: ${DB_PASSWORD:}
+  flyway:
+    url: jdbc:h2:mem:gamedb
+    user: ${DB_USER:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop # as we're using h2 it doesn't really matter
