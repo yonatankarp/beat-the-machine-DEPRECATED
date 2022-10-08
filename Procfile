@@ -1,1 +1,1 @@
-web: java -jar ai-guess-game/build/libs/ai-guess-game.jar --server.port=$PORT
+web: java -jar beat-the-machine/build/libs/beat-the-machine.jar --server.port=$PORT
