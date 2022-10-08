@@ -1,14 +1,36 @@
 # Beat The Machine!
 
+[ci-badge]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/ci.yml/badge.svg
+[ci-state]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/ci.yml
+[linter-badge]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/linting.yml/badge.svg
+[linter-state]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/linting.yml
+[quality-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=alert_status
+[quality-state]: https://sonarcloud.io/summary/new_code?id=yonatankarp_beat-the-machine
+[maintainability-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=sqale_rating
+[maintainability-state]: https://sonarcloud.io/summary/new_code?id=yonatankarp_beat-the-machine
+[tech-debt-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=sqale_index
+[tech-debt-state]: https://sonarcloud.io/summary/new_code?id=yonatankarp_beat-the-machine
+[security-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=security_rating
+[security-state]: https://sonarcloud.io/summary/new_code?id=yonatankarp_beat-the-machine
+[vulnerabilities-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=vulnerabilities
+[vulnerabilities-state]: https://sonarcloud.io/summary/new_code?id=yonatankarp_beat-the-machine
+
+| **Type**     | **Status**                                                                                                                                                                             |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| CI pipelines | [![Build][ci-badge]][ci-state]  [![Build][linter-badge]][linter-state]                                                                                                                 |
+| Maintenance  | [![Quality Gate Status][quality-badge]][quality-state] [![Maintainability Rating][maintainability-badge]][maintainability-state] [![Technical Debt][tech-debt-badge]][tech-debt-state] |
+| Security     | [![Security Rating][security-badge]][security-state] [![Vulnerabilities][vulnerabilities-badge]][vulnerabilities-state]                                                                |
+
 This repository manages the entire [Beat the machine!](https://ai-guess-game.herokuapp.com/)
 game, which allow you to play the "Hangman Challenge" for auto AI auto-generated
 images.
 
-To play the game, run the application by running the following command in your
-terminal:
+To play the game locally on your machine, you can download the latest
+[release](https://github.com/yonatankarp/beat-the-machine/releases) jar file
+and run it using the command:
 
 ```shell
-./gradlew bootRun
+java -jar beat-the-machine-0.1.0.jar
 ```
 
 Go to your browser and enter the following url:
@@ -16,6 +38,8 @@ Go to your browser and enter the following url:
 ```text
 https://localhost
 ```
+
+![welcome screen](docs/resources/welcome_screen.png)
 
 ## Getting Started
 
