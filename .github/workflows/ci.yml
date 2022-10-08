@@ -65,20 +65,12 @@ jobs:
               - '${{ matrix.service }}/build.gradle'
               - 'build.gradle'
 
-      - name: Cache SonarCloud packages
-        if: steps.changes.outputs.source_code == 'true'
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      - name: Build and analyze
-        if: steps.changes.outputs.source_code == 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew build sonarqube
+      - name: Gradle Test
+          if: steps.changes.outputs.source_code == 'true'
+          id: tests
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: ./gradlew build
 
   dependabot_auto_merge:
     if: ${{ github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]' }}

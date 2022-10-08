@@ -1,5 +1,4 @@
 plugins {
-    id("jacoco")
     id("beat-the-machine.java-conventions") apply true
     id("beat-the-machine.code-metrics") apply true
     id("beat-the-machine.publishing-conventions") apply true

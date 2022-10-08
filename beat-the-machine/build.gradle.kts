@@ -40,17 +40,6 @@ tasks {
         finalizedBy(jacocoTestReport)
         finalizedBy(pmdTest)
     }
-
-    jacoco {
-        toolVersion = "0.8.7"
-    }
-
-    jacocoTestReport {
-        reports {
-            xml.required.set(true)
-            html.required.set(true)
-        }
-    }
 }
 
 
