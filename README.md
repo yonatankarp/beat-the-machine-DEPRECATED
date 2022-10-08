@@ -1,4 +1,4 @@
-# ai-guess-game
+# Beat The Machine!
 
 This repository manages the entire [Beat the machine!](https://ai-guess-game.herokuapp.com/)
 game, which allow you to play the "Hangman Challenge" for auto AI auto-generated

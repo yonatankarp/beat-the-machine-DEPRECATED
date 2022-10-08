@@ -1,2 +1,2 @@
-rootProject.name = "ai-guess-game"
-include 'ai-guess-game'
+rootProject.name = "beat-the-machine"
+include 'beat-the-machine'
