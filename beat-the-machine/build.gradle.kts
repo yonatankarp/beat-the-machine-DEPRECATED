@@ -1,27 +1,10 @@
 plugins {
     id("jacoco")
-    id("pmd")
+    id("beat-the-machine.code-metrics")
     id("org.springframework.boot")
     id("io.spring.dependency-management")
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.kotlin.plugin.spring")
-    id("com.diffplug.spotless")
-}
-
-jar {
-    enabled = false
-}
-
-bootJar {
-    enabled = true
-}
-
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'com.yonatankarp.ai.guess.game.Application'
-        )
-    }
 }
 
 dependencies {
@@ -33,19 +16,25 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude group: "org.mockito", module: "mockito-core"
+        exclude("org.mockito:mockito-core")
     }
     testImplementation("io.mockk:mockk:1.13.2")
     testImplementation("com.ninja-squad:springmockk:3.1.1")
 }
 
-build {
-    finalizedBy spotlessApply
-}
+tasks {
+    getByName<Jar>("jar") {
+        enabled = false
+    }
 
-test {
-    useJUnitPlatform()
-    finalizedBy spotlessApply
-    finalizedBy jacocoTestReport
-    finalizedBy pmdTest
+    build {
+        finalizedBy(spotlessApply)
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+        finalizedBy(spotlessApply)
+        finalizedBy(jacocoTestReport)
+        finalizedBy(pmdTest)
+    }
 }
