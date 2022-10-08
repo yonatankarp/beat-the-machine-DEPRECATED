@@ -1,51 +1,56 @@
 plugins {
     id("jacoco")
-    id("pmd")
+    id("beat-the-machine.code-metrics")
     id("org.springframework.boot")
     id("io.spring.dependency-management")
-    id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlin.plugin.spring")
-    id("com.diffplug.spotless")
-}
-
-jar {
-    enabled = false
-}
-
-bootJar {
-    enabled = true
-}
-
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'com.yonatankarp.ai.guess.game.Application'
-        )
-    }
+    kotlin("jvm")
+    kotlin("plugin.spring")
 }
 
 dependencies {
+    // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
+    // Kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
+    // Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude group: "org.mockito", module: "mockito-core"
+        exclude(group = "org.mockito", module = "mockito-core")
     }
     testImplementation("io.mockk:mockk:1.13.2")
     testImplementation("com.ninja-squad:springmockk:3.1.1")
 }
 
-build {
-    finalizedBy spotlessApply
+tasks {
+    getByName<Jar>("jar") {
+        enabled = false
+    }
+
+    build {
+        finalizedBy(spotlessApply)
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
+        finalizedBy(spotlessApply)
+        finalizedBy(jacocoTestReport)
+        finalizedBy(pmdTest)
+    }
+
+    jacoco {
+        toolVersion = "0.8.7"
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+        }
+    }
 }
 
-test {
-    useJUnitPlatform()
-    finalizedBy spotlessApply
-    finalizedBy jacocoTestReport
-    finalizedBy pmdTest
-}
+

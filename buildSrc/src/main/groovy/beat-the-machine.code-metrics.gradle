@@ -1,7 +1,7 @@
 plugins {
-    id("jacoco")
     id("pmd")
     id("com.diffplug.spotless")
+    id("org.sonarqube")
 }
 
 repositories { mavenCentral() }
@@ -24,19 +24,15 @@ spotless {
 
 pmd {
     toolVersion = "6.42.0"
-    sourceSets = [sourceSets.main]
     reportsDir = file("$project.buildDir/reports/pmd")
     ruleSets = []
     ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
-jacoco {
-    toolVersion = "0.8.7"
-}
-
-jacocoTestReport {
-    reports {
-        xml.required = true
-        html.required = true
+sonarqube {
+    properties {
+        property("sonar.projectKey", "yonatankarp_beat-the-machine")
+        property("sonar.organization", "yonatankarp")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
