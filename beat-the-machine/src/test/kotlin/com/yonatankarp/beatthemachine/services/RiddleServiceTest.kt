@@ -1,7 +1,7 @@
-package com.yonatankarp.ai.guess.game.services
+package com.yonatankarp.beatthemachine.services
 
-import com.yonatankarp.ai.guess.game.models.Guess
-import com.yonatankarp.ai.guess.game.models.Guess.GuessResult
+import com.yonatankarp.beatthemachine.models.Guess
+import com.yonatankarp.beatthemachine.models.Guess.GuessResult
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments

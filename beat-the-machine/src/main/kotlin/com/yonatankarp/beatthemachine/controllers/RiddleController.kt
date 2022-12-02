@@ -1,8 +1,8 @@
-package com.yonatankarp.ai.guess.game.controllers
+package com.yonatankarp.beatthemachine.controllers
 
-import com.yonatankarp.ai.guess.game.models.Guess
-import com.yonatankarp.ai.guess.game.services.RiddleManager
-import com.yonatankarp.ai.guess.game.services.RiddleService
+import com.yonatankarp.beatthemachine.models.Guess
+import com.yonatankarp.beatthemachine.services.RiddleManager
+import com.yonatankarp.beatthemachine.services.RiddleService
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model

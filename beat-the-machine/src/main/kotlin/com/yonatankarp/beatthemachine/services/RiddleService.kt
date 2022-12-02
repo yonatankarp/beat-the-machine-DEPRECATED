@@ -1,9 +1,9 @@
-package com.yonatankarp.ai.guess.game.services
+package com.yonatankarp.beatthemachine.services
 
-import com.yonatankarp.ai.guess.game.models.Guess
-import com.yonatankarp.ai.guess.game.models.Guess.GuessResult.HIT
-import com.yonatankarp.ai.guess.game.models.Guess.GuessResult.MISS
-import com.yonatankarp.ai.guess.game.utils.toHiddenString
+import com.yonatankarp.beatthemachine.models.Guess
+import com.yonatankarp.beatthemachine.models.Guess.GuessResult.HIT
+import com.yonatankarp.beatthemachine.models.Guess.GuessResult.MISS
+import com.yonatankarp.beatthemachine.utils.toHiddenString
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import kotlin.random.Random

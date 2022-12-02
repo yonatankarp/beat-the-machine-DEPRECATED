@@ -1,4 +1,4 @@
-package com.yonatankarp.ai.guess.game.models
+package com.yonatankarp.beatthemachine.models
 
 data class Guess(var words: List<String>? = null) {
     enum class GuessResult {

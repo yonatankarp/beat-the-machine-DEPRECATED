@@ -1,11 +1,11 @@
-package com.yonatankarp.ai.guess.game.controllers
+package com.yonatankarp.beatthemachine.controllers
 
 import com.ninjasquad.springmockk.MockkBean
-import com.yonatankarp.ai.guess.game.models.Guess
-import com.yonatankarp.ai.guess.game.models.Guess.GuessResult
-import com.yonatankarp.ai.guess.game.models.Riddle
-import com.yonatankarp.ai.guess.game.services.RiddleManager
-import com.yonatankarp.ai.guess.game.services.RiddleService
+import com.yonatankarp.beatthemachine.models.Guess
+import com.yonatankarp.beatthemachine.models.Guess.GuessResult
+import com.yonatankarp.beatthemachine.models.Riddle
+import com.yonatankarp.beatthemachine.services.RiddleManager
+import com.yonatankarp.beatthemachine.services.RiddleService
 import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.verify

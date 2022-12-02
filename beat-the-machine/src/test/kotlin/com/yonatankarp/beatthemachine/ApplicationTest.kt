@@ -1,4 +1,4 @@
-package com.yonatankarp.ai.guess.game
+package com.yonatankarp.beatthemachine
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

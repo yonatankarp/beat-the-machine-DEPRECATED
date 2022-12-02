@@ -1,6 +1,6 @@
-package com.yonatankarp.ai.guess.game.services
+package com.yonatankarp.beatthemachine.services
 
-import com.yonatankarp.ai.guess.game.models.Riddle
+import com.yonatankarp.beatthemachine.models.Riddle
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

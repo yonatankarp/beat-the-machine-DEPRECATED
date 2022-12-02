@@ -1,7 +1,7 @@
-package com.yonatankarp.ai.guess.game.services
+package com.yonatankarp.beatthemachine.services
 
-import com.yonatankarp.ai.guess.game.models.Riddle
-import com.yonatankarp.ai.guess.game.utils.toHiddenString
+import com.yonatankarp.beatthemachine.models.Riddle
+import com.yonatankarp.beatthemachine.utils.toHiddenString
 
 object RiddleManager {
 

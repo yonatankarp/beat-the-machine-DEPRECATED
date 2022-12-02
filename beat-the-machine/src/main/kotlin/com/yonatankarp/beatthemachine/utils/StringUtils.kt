@@ -1,4 +1,4 @@
-package com.yonatankarp.ai.guess.game.utils
+package com.yonatankarp.beatthemachine.utils
 
 fun String.toHiddenString(): String {
     val builder = StringBuilder()

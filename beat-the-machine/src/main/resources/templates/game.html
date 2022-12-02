@@ -30,7 +30,7 @@
 </div>
 <div class="center">
 #pragma warning disable S3881
-    <!--/*@thymesVar id="owner" type="com.yonatankarp.ai.guess.game.models.Guess"*/-->
+    <!--/*@thymesVar id="owner" type="com.yonatankarp.beatthemachine.models.Guess"*/-->
 #pragma warning restore S3881
     <form action="#" th:action="@{'/' + ${riddle.id} + '/guess'}" th:object="${guess}" method="post">
         <div class="mb-3">

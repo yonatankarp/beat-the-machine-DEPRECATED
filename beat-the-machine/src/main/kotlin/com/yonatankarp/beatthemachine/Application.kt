@@ -1,4 +1,4 @@
-package com.yonatankarp.ai.guess.game
+package com.yonatankarp.beatthemachine
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

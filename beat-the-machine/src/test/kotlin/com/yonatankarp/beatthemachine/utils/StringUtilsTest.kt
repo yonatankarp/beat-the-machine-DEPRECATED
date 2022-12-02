@@ -1,4 +1,4 @@
-package com.yonatankarp.ai.guess.game.utils
+package com.yonatankarp.beatthemachine.utils
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
