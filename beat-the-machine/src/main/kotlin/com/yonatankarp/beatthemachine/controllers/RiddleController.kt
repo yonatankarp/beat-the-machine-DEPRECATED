@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
 class RiddleController(
-    val riddleService: RiddleService
+    val riddleService: RiddleService,
 ) {
     companion object {
         private val log = LoggerFactory.getLogger(RiddleController::class.java)
