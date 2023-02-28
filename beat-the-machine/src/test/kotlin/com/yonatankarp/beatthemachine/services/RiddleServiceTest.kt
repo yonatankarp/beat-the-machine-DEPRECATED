@@ -30,8 +30,8 @@ class RiddleServiceTest {
                     "------" to GuessResult.MISS.name,
                     "--" to GuessResult.MISS.name,
                     "-" to GuessResult.MISS.name,
-                    "---" to GuessResult.MISS.name
-                )
+                    "---" to GuessResult.MISS.name,
+                ),
             ),
             Arguments.of(
                 0,
@@ -41,8 +41,8 @@ class RiddleServiceTest {
                     "------" to GuessResult.MISS.name,
                     "--" to GuessResult.MISS.name,
                     "a" to GuessResult.HIT.name, // TODO: fix after fixing word recognition
-                    "man" to GuessResult.HIT.name
-                )
+                    "man" to GuessResult.HIT.name,
+                ),
             ),
             Arguments.of(
                 0,
@@ -52,8 +52,8 @@ class RiddleServiceTest {
                     "stands" to GuessResult.HIT.name,
                     "on" to GuessResult.HIT.name,
                     "a" to GuessResult.HIT.name,
-                    "man" to GuessResult.HIT.name
-                )
+                    "man" to GuessResult.HIT.name,
+                ),
             ),
             Arguments.of(
                 0,
@@ -63,9 +63,9 @@ class RiddleServiceTest {
                     "------" to GuessResult.MISS.name,
                     "--" to GuessResult.MISS.name,
                     "-" to GuessResult.MISS.name,
-                    "---" to GuessResult.MISS.name
-                )
-            )
+                    "---" to GuessResult.MISS.name,
+                ),
+            ),
         )
     }
 }

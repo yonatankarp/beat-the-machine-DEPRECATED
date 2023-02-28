@@ -77,8 +77,8 @@ class RiddleControllerTest {
                             "man" to GuessResult.MISS.name,
                             "on" to GuessResult.MISS.name,
                             "the" to GuessResult.MISS.name,
-                            "moon" to GuessResult.MISS.name
-                        )
+                            "moon" to GuessResult.MISS.name,
+                        ),
                     )
                 }
             }
@@ -95,7 +95,7 @@ class RiddleControllerTest {
             "dragon" to GuessResult.MISS.name,
             "eating" to GuessResult.MISS.name,
             "a" to GuessResult.MISS.name,
-            "cookie" to GuessResult.MISS.name
+            "cookie" to GuessResult.MISS.name,
         )
         every { service.handleGuess(any(), any()) } returns guessHits
 
@@ -109,7 +109,7 @@ class RiddleControllerTest {
                 attribute("riddle", riddle)
                 attribute(
                     "response",
-                    guessHits
+                    guessHits,
                 )
             }
         }
