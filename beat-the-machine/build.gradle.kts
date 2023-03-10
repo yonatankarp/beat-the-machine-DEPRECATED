@@ -25,7 +25,7 @@ dependencies {
         exclude("org.mockito:mockito-core")
     }
     testImplementation("io.mockk:mockk:1.13.4")
-    testImplementation("com.ninja-squad:springmockk:4.0.1")
+    testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
 tasks {
