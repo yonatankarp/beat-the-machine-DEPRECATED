@@ -44,3 +44,8 @@ tasks {
         finalizedBy(pmdTest)
     }
 }
+
+tasks.findByName("spotlessKotlin")?.dependsOn("compileKotlin")
+tasks.findByName("spotlessKotlin")?.dependsOn("compileTestKotlin")
+tasks.findByName("spotlessKotlin")?.dependsOn("test")
+tasks.findByName("spotlessKotlin")?.dependsOn("jacocoTestReport")
