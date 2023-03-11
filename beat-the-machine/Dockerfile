@@ -6,7 +6,7 @@ ENV APP_BASE="/home" \
 
 EXPOSE ${SERVER_PORT}
 
-RUN apk update && apk upgrade && apk add curl openssl gcompat bash busybox-extras iputils
+#RUN apk update && apk upgrade && apk add curl openssl gcompat bash busybox-extras iputils
 
 RUN mkdir -p source_code
 
