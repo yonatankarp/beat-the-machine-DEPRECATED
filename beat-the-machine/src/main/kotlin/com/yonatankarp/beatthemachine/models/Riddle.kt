@@ -6,11 +6,11 @@ data class Riddle(val id: Int, val startPrompt: String, val prompt: String, val 
     fun giveUp() =
         this.prompt
             .split(" ")
-            .map { it to MISS.name }
+            .map { it to MISS }
 
     fun initPrompt() =
         this.startPrompt
             .split(" ")
-            .map { it to MISS.name }
+            .map { it to MISS }
             .toList()
 }

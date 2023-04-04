@@ -14,7 +14,7 @@ class RiddleServiceTest {
 
     @ParameterizedTest
     @MethodSource("provideTestData")
-    fun `should map guess to results`(id: Int, guess: Guess, expected: List<Pair<String, String>>) {
+    fun `should map guess to results`(id: Int, guess: Guess, expected: List<Pair<String, GuessResult>>) {
         val actual = service.handleGuess(id, guess)
         assertEquals(expected, actual)
     }
@@ -26,44 +26,44 @@ class RiddleServiceTest {
                 0,
                 Guess(listOf("incorrect guess")),
                 listOf(
-                    "---" to GuessResult.MISS.name,
-                    "------" to GuessResult.MISS.name,
-                    "--" to GuessResult.MISS.name,
-                    "-" to GuessResult.MISS.name,
-                    "---" to GuessResult.MISS.name,
+                    "---" to GuessResult.MISS,
+                    "------" to GuessResult.MISS,
+                    "--" to GuessResult.MISS,
+                    "-" to GuessResult.MISS,
+                    "---" to GuessResult.MISS,
                 ),
             ),
             Arguments.of(
                 0,
                 Guess(listOf("man")),
                 listOf(
-                    "man" to GuessResult.HIT.name,
-                    "------" to GuessResult.MISS.name,
-                    "--" to GuessResult.MISS.name,
-                    "a" to GuessResult.HIT.name, // TODO: fix after fixing word recognition
-                    "man" to GuessResult.HIT.name,
+                    "man" to GuessResult.HIT,
+                    "------" to GuessResult.MISS,
+                    "--" to GuessResult.MISS,
+                    "-" to GuessResult.MISS,
+                    "man" to GuessResult.HIT,
                 ),
             ),
             Arguments.of(
                 0,
-                Guess(listOf("man stands on a man")),
+                Guess("man stands on a man".split(" ")),
                 listOf(
-                    "man" to GuessResult.HIT.name,
-                    "stands" to GuessResult.HIT.name,
-                    "on" to GuessResult.HIT.name,
-                    "a" to GuessResult.HIT.name,
-                    "man" to GuessResult.HIT.name,
+                    "man" to GuessResult.HIT,
+                    "stands" to GuessResult.HIT,
+                    "on" to GuessResult.HIT,
+                    "a" to GuessResult.HIT,
+                    "man" to GuessResult.HIT,
                 ),
             ),
             Arguments.of(
                 0,
                 Guess(null),
                 listOf(
-                    "---" to GuessResult.MISS.name,
-                    "------" to GuessResult.MISS.name,
-                    "--" to GuessResult.MISS.name,
-                    "-" to GuessResult.MISS.name,
-                    "---" to GuessResult.MISS.name,
+                    "---" to GuessResult.MISS,
+                    "------" to GuessResult.MISS,
+                    "--" to GuessResult.MISS,
+                    "-" to GuessResult.MISS,
+                    "---" to GuessResult.MISS,
                 ),
             ),
         )

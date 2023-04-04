@@ -17,7 +17,7 @@ class RiddleTest {
         // Then
         riddle.prompt.split(" ").forEachIndexed { i, word ->
             assertEquals(word, actual[i].first)
-            assertEquals(MISS.name, actual[i].second)
+            assertEquals(MISS, actual[i].second)
         }
     }
 
@@ -32,7 +32,7 @@ class RiddleTest {
         // Then
         actual.forEach {
             assertEquals("---", it.first)
-            assertEquals(MISS.name, it.second)
+            assertEquals(MISS, it.second)
         }
     }
 }
