@@ -49,3 +49,8 @@ tasks.findByName("spotlessKotlin")?.dependsOn("compileKotlin")
 tasks.findByName("spotlessKotlin")?.dependsOn("compileTestKotlin")
 tasks.findByName("spotlessKotlin")?.dependsOn("test")
 tasks.findByName("spotlessKotlin")?.dependsOn("jacocoTestReport")
+
+/* Required for deployment to Railway - see: https://medium.com/codex/deploying-a-kotlin-app-in-railway-a-slack-bot-f1d7a2386652 */
+task("stage") {
+    dependsOn("shadowJar")
+}
