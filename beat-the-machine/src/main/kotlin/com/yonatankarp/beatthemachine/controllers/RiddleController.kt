@@ -1,6 +1,7 @@
 package com.yonatankarp.beatthemachine.controllers
 
-import com.yonatankarp.beatthemachine.models.Guess
+import com.yonatankarp.beatthemachine.models.GuessRequest
+import com.yonatankarp.beatthemachine.models.GuessResponse
 import com.yonatankarp.beatthemachine.services.RiddleManager
 import com.yonatankarp.beatthemachine.services.RiddleService
 import org.slf4j.LoggerFactory
@@ -23,7 +24,7 @@ class RiddleController(
     fun index(model: Model): String {
         log.info("Loading index...")
         riddleService.getRandomRiddle().let {
-            model.addAttribute("guess", Guess(emptyList()))
+            model.addAttribute("guess", GuessResponse(emptyList()))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.initPrompt())
         }
@@ -34,7 +35,7 @@ class RiddleController(
     fun iGiveUp(@PathVariable id: Int, model: Model): String {
         log.info("Giving up on riddle id: $id")
         riddleService.getRiddle(id.toRiddleId()).let {
-            model.addAttribute("guess", Guess(listOf()))
+            model.addAttribute("guess", GuessResponse(listOf()))
             model.addAttribute("riddle", it)
             model.addAttribute("response", it.giveUp())
         }
@@ -43,7 +44,7 @@ class RiddleController(
     }
 
     @PostMapping("/{id}/guess")
-    fun submitGuess(@PathVariable id: Int, @ModelAttribute guess: Guess, model: Model): String {
+    fun submitGuess(@PathVariable id: Int, @ModelAttribute guess: GuessRequest, model: Model): String {
         val riddleId = id.toRiddleId()
         log.info("Guess for id $riddleId is ${guess.words}")
         riddleService.handleGuess(riddleId, guess)

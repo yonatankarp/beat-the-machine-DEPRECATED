@@ -1,9 +1,9 @@
 package com.yonatankarp.beatthemachine.services
 
-import com.yonatankarp.beatthemachine.models.Guess
-import com.yonatankarp.beatthemachine.models.Guess.GuessResult
-import com.yonatankarp.beatthemachine.models.Guess.GuessResult.HIT
-import com.yonatankarp.beatthemachine.models.Guess.GuessResult.MISS
+import com.yonatankarp.beatthemachine.models.GuessRequest
+import com.yonatankarp.beatthemachine.models.GuessResponse.GuessResult
+import com.yonatankarp.beatthemachine.models.GuessResponse.GuessResult.HIT
+import com.yonatankarp.beatthemachine.models.GuessResponse.GuessResult.MISS
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import kotlin.random.Random
@@ -18,14 +18,14 @@ class RiddleService {
         private val WHITESPACE_REGEX = """\s+""".toRegex()
     }
 
-    fun handleGuess(id: Int, guess: Guess): List<Pair<String, GuessResult>> {
+    fun handleGuess(id: Int, guess: GuessRequest): List<Pair<String, GuessResult>> {
         val riddle = getRiddle(id)
-        if (guess.words == null) return riddle.initPrompt()
+        return guess.words?.let {
+            val guesses = guess.words?.split(" ")?.map { it.lowercase() }?.toList() ?: emptyList()
 
-        val guesses = guess.words?.map { it.lowercase() }?.toList() ?: emptyList()
-
-        return maskNoneGuessedWords(guesses, riddle.prompt)
-            .also { log.info("Phrase '${riddle.prompt}' with guess $guess have the results: $it") }
+            return maskNoneGuessedWords(guesses, riddle.prompt)
+                .also { log.info("Phrase '${riddle.prompt}' with guess $guess have the results: $it") }
+        } ?: riddle.initPrompt()
     }
 
     fun maskNoneGuessedWords(words: List<String>, prompt: String): List<Pair<String, GuessResult>> =
