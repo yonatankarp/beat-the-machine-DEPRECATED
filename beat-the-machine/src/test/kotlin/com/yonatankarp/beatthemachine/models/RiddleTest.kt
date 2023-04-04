@@ -1,6 +1,6 @@
 package com.yonatankarp.beatthemachine.models
 
-import com.yonatankarp.beatthemachine.models.Guess.GuessResult.MISS
+import com.yonatankarp.beatthemachine.models.GuessResponse.GuessResult.MISS
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

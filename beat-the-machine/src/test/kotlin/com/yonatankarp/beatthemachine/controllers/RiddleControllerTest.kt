@@ -1,8 +1,9 @@
 package com.yonatankarp.beatthemachine.controllers
 
 import com.ninjasquad.springmockk.MockkBean
-import com.yonatankarp.beatthemachine.models.Guess
-import com.yonatankarp.beatthemachine.models.Guess.GuessResult
+import com.yonatankarp.beatthemachine.models.GuessRequest
+import com.yonatankarp.beatthemachine.models.GuessResponse
+import com.yonatankarp.beatthemachine.models.GuessResponse.GuessResult
 import com.yonatankarp.beatthemachine.models.Riddle
 import com.yonatankarp.beatthemachine.services.RiddleManager
 import com.yonatankarp.beatthemachine.services.RiddleService
@@ -48,7 +49,7 @@ class RiddleControllerTest {
                 status { isOk() }
                 view { name("index") }
                 model {
-                    attribute("guess", Guess(emptyList()))
+                    attribute("guess", GuessResponse(emptyList()))
                     attribute("riddle", riddle)
                     attribute("response", listOf("---" to GuessResult.MISS))
                 }
@@ -68,7 +69,7 @@ class RiddleControllerTest {
                 status { isOk() }
                 view { name("game") }
                 model {
-                    attribute("guess", Guess(emptyList()))
+                    attribute("guess", GuessResponse(emptyList()))
                     attribute("riddle", riddle)
                     attribute(
                         "response",
@@ -90,7 +91,7 @@ class RiddleControllerTest {
     fun `should submit guess`() {
         val riddleId = 4
         val riddle = RiddleManager.riddles[riddleId]
-        val guess = Guess()
+        val guess = GuessRequest()
         val guessHits = listOf(
             "dragon" to GuessResult.MISS,
             "eating" to GuessResult.MISS,
@@ -105,12 +106,9 @@ class RiddleControllerTest {
             status { isOk() }
             view { name("game") }
             model {
-                attribute("guess", guess)
+                attribute("guess", GuessRequest())
                 attribute("riddle", riddle)
-                attribute(
-                    "response",
-                    guessHits,
-                )
+                attribute("response", guessHits)
             }
         }
 

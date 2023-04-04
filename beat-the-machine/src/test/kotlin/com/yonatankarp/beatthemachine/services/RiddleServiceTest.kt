@@ -1,7 +1,7 @@
 package com.yonatankarp.beatthemachine.services
 
-import com.yonatankarp.beatthemachine.models.Guess
-import com.yonatankarp.beatthemachine.models.Guess.GuessResult
+import com.yonatankarp.beatthemachine.models.GuessRequest
+import com.yonatankarp.beatthemachine.models.GuessResponse.GuessResult
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -14,7 +14,11 @@ class RiddleServiceTest {
 
     @ParameterizedTest
     @MethodSource("provideTestData")
-    fun `should map guess to results`(id: Int, guess: Guess, expected: List<Pair<String, GuessResult>>) {
+    fun `should map guess to results`(
+        id: Int,
+        guess: GuessRequest,
+        expected: List<Pair<String, GuessResult>>,
+    ) {
         val actual = service.handleGuess(id, guess)
         assertEquals(expected, actual)
     }
@@ -24,7 +28,7 @@ class RiddleServiceTest {
         fun provideTestData(): Stream<Arguments> = Stream.of(
             Arguments.of(
                 0,
-                Guess(listOf("incorrect guess")),
+                GuessRequest("incorrect guess"),
                 listOf(
                     "---" to GuessResult.MISS,
                     "------" to GuessResult.MISS,
@@ -35,7 +39,7 @@ class RiddleServiceTest {
             ),
             Arguments.of(
                 0,
-                Guess(listOf("man")),
+                GuessRequest("man"),
                 listOf(
                     "man" to GuessResult.HIT,
                     "------" to GuessResult.MISS,
@@ -46,7 +50,7 @@ class RiddleServiceTest {
             ),
             Arguments.of(
                 0,
-                Guess(listOf("Man")),
+                GuessRequest("Man"),
                 listOf(
                     "man" to GuessResult.HIT,
                     "------" to GuessResult.MISS,
@@ -57,7 +61,7 @@ class RiddleServiceTest {
             ),
             Arguments.of(
                 0,
-                Guess("man stands on a man".split(" ")),
+                GuessRequest("man stands on a man"),
                 listOf(
                     "man" to GuessResult.HIT,
                     "stands" to GuessResult.HIT,
@@ -68,7 +72,7 @@ class RiddleServiceTest {
             ),
             Arguments.of(
                 0,
-                Guess(null),
+                GuessRequest(null),
                 listOf(
                     "---" to GuessResult.MISS,
                     "------" to GuessResult.MISS,
