@@ -50,7 +50,7 @@ class RiddleControllerTest {
                 model {
                     attribute("guess", Guess(emptyList()))
                     attribute("riddle", riddle)
-                    attribute("response", listOf("---" to GuessResult.MISS.name))
+                    attribute("response", listOf("---" to GuessResult.MISS))
                 }
             }
 
@@ -73,11 +73,11 @@ class RiddleControllerTest {
                     attribute(
                         "response",
                         listOf(
-                            "a" to GuessResult.MISS.name,
-                            "man" to GuessResult.MISS.name,
-                            "on" to GuessResult.MISS.name,
-                            "the" to GuessResult.MISS.name,
-                            "moon" to GuessResult.MISS.name,
+                            "a" to GuessResult.MISS,
+                            "man" to GuessResult.MISS,
+                            "on" to GuessResult.MISS,
+                            "the" to GuessResult.MISS,
+                            "moon" to GuessResult.MISS,
                         ),
                     )
                 }
@@ -92,10 +92,10 @@ class RiddleControllerTest {
         val riddle = RiddleManager.riddles[riddleId]
         val guess = Guess()
         val guessHits = listOf(
-            "dragon" to GuessResult.MISS.name,
-            "eating" to GuessResult.MISS.name,
-            "a" to GuessResult.MISS.name,
-            "cookie" to GuessResult.MISS.name,
+            "dragon" to GuessResult.MISS,
+            "eating" to GuessResult.MISS,
+            "a" to GuessResult.MISS,
+            "cookie" to GuessResult.MISS,
         )
         every { service.handleGuess(any(), any()) } returns guessHits
 

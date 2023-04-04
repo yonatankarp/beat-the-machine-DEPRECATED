@@ -29,9 +29,7 @@
     <img th:src="${riddle.url}" class="img-thumbnail" width="500" alt="generated image"/>
 </div>
 <div class="center">
-#pragma warning disable S3881
     <!--/*@thymesVar id="owner" type="com.yonatankarp.beatthemachine.models.Guess"*/-->
-#pragma warning restore S3881
     <form action="#" th:action="@{'/' + ${riddle.id} + '/guess'}" th:object="${guess}" method="post">
         <div class="mb-3">
             <label class="form-label">Guess:</label>
@@ -42,7 +40,7 @@
             <div>
                 <tbody>
                 <tr th:each="word : ${response}">
-                    <div th:text="${word.first}" th:class="@{'prompt ' + ${word.second}}">prompt</div>
+                    <div th:text="${word.first}" th:class="@{'prompt ' + ${word.second.value}}">prompt</div>
                 </tr>
                 <tbody>
             </div>
