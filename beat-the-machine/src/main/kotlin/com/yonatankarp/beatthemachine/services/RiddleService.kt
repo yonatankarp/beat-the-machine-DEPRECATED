@@ -22,14 +22,16 @@ class RiddleService {
         val riddle = getRiddle(id)
         if (guess.words == null) return riddle.initPrompt()
 
-        return maskNoneGuessedWords(guess.words, riddle.prompt)
+        val guesses = guess.words?.map { it.lowercase() }?.toList() ?: emptyList()
+
+        return maskNoneGuessedWords(guesses, riddle.prompt)
             .also { log.info("Phrase '${riddle.prompt}' with guess $guess have the results: $it") }
     }
 
-    fun maskNoneGuessedWords(words: List<String>?, prompt: String): List<Pair<String, GuessResult>> =
+    fun maskNoneGuessedWords(words: List<String>, prompt: String): List<Pair<String, GuessResult>> =
         prompt.lowercase().split(WHITESPACE_REGEX)
             .map { word ->
-                if (words?.contains(word) == true) {
+                if (words.contains(word)) {
                     word to HIT
                 } else {
                     MASK_CHARACTER.repeat(word.length) to MISS

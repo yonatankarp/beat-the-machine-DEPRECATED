@@ -46,6 +46,17 @@ class RiddleServiceTest {
             ),
             Arguments.of(
                 0,
+                Guess(listOf("Man")),
+                listOf(
+                    "man" to GuessResult.HIT,
+                    "------" to GuessResult.MISS,
+                    "--" to GuessResult.MISS,
+                    "-" to GuessResult.MISS,
+                    "man" to GuessResult.HIT,
+                ),
+            ),
+            Arguments.of(
+                0,
                 Guess("man stands on a man".split(" ")),
                 listOf(
                     "man" to GuessResult.HIT,
