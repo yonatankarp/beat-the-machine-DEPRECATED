@@ -21,7 +21,7 @@
 | Maintenance  | [![Quality Gate Status][quality-badge]][quality-state] [![Maintainability Rating][maintainability-badge]][maintainability-state] [![Technical Debt][tech-debt-badge]][tech-debt-state] |
 | Security     | [![Security Rating][security-badge]][security-state] [![Vulnerabilities][vulnerabilities-badge]][vulnerabilities-state]                                                                |
 
-This repository manages the entire [Beat the machine!](https://ai-guess-game.herokuapp.com/)
+This repository manages the entire [Beat the machine!](https://beat-the-machine.yonatankarp.com/)
 game, which allow you to play the "Hangman Challenge" for auto AI auto-generated
 images.
 
