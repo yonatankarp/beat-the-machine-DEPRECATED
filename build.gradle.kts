@@ -3,7 +3,7 @@ plugins {
     id("beat-the-machine.code-metrics")
     id("beat-the-machine.publishing-conventions")
     id("com.diffplug.spotless") version "6.21.0" apply false
-    id("org.springframework.boot") version "3.1.3" apply false
+    id("org.springframework.boot") version "3.1.4" apply false
     id("io.spring.dependency-management") version "1.1.3" apply false
     val kotlinVersion = "1.9.10"
     id("org.jetbrains.kotlin.jvm") version kotlinVersion apply false
