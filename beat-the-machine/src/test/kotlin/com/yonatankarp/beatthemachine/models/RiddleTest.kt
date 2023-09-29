@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class RiddleTest {
-
     @Test
     fun `should mark all prompt as hit when player give up`() {
         // Given

@@ -9,7 +9,6 @@ import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
 class RiddleServiceTest {
-
     private val service: RiddleService = RiddleService()
 
     @ParameterizedTest
@@ -25,62 +24,63 @@ class RiddleServiceTest {
 
     companion object {
         @JvmStatic
-        fun provideTestData(): Stream<Arguments> = Stream.of(
-            Arguments.of(
-                0,
-                GuessRequest("incorrect guess"),
-                listOf(
-                    "---" to GuessResult.MISS,
-                    "------" to GuessResult.MISS,
-                    "--" to GuessResult.MISS,
-                    "-" to GuessResult.MISS,
-                    "---" to GuessResult.MISS,
+        fun provideTestData(): Stream<Arguments> =
+            Stream.of(
+                Arguments.of(
+                    0,
+                    GuessRequest("incorrect guess"),
+                    listOf(
+                        "---" to GuessResult.MISS,
+                        "------" to GuessResult.MISS,
+                        "--" to GuessResult.MISS,
+                        "-" to GuessResult.MISS,
+                        "---" to GuessResult.MISS,
+                    ),
                 ),
-            ),
-            Arguments.of(
-                0,
-                GuessRequest("man"),
-                listOf(
-                    "man" to GuessResult.HIT,
-                    "------" to GuessResult.MISS,
-                    "--" to GuessResult.MISS,
-                    "-" to GuessResult.MISS,
-                    "man" to GuessResult.HIT,
+                Arguments.of(
+                    0,
+                    GuessRequest("man"),
+                    listOf(
+                        "man" to GuessResult.HIT,
+                        "------" to GuessResult.MISS,
+                        "--" to GuessResult.MISS,
+                        "-" to GuessResult.MISS,
+                        "man" to GuessResult.HIT,
+                    ),
                 ),
-            ),
-            Arguments.of(
-                0,
-                GuessRequest("Man"),
-                listOf(
-                    "man" to GuessResult.HIT,
-                    "------" to GuessResult.MISS,
-                    "--" to GuessResult.MISS,
-                    "-" to GuessResult.MISS,
-                    "man" to GuessResult.HIT,
+                Arguments.of(
+                    0,
+                    GuessRequest("Man"),
+                    listOf(
+                        "man" to GuessResult.HIT,
+                        "------" to GuessResult.MISS,
+                        "--" to GuessResult.MISS,
+                        "-" to GuessResult.MISS,
+                        "man" to GuessResult.HIT,
+                    ),
                 ),
-            ),
-            Arguments.of(
-                0,
-                GuessRequest("man stands on a man"),
-                listOf(
-                    "man" to GuessResult.HIT,
-                    "stands" to GuessResult.HIT,
-                    "on" to GuessResult.HIT,
-                    "a" to GuessResult.HIT,
-                    "man" to GuessResult.HIT,
+                Arguments.of(
+                    0,
+                    GuessRequest("man stands on a man"),
+                    listOf(
+                        "man" to GuessResult.HIT,
+                        "stands" to GuessResult.HIT,
+                        "on" to GuessResult.HIT,
+                        "a" to GuessResult.HIT,
+                        "man" to GuessResult.HIT,
+                    ),
                 ),
-            ),
-            Arguments.of(
-                0,
-                GuessRequest(null),
-                listOf(
-                    "---" to GuessResult.MISS,
-                    "------" to GuessResult.MISS,
-                    "--" to GuessResult.MISS,
-                    "-" to GuessResult.MISS,
-                    "---" to GuessResult.MISS,
+                Arguments.of(
+                    0,
+                    GuessRequest(null),
+                    listOf(
+                        "---" to GuessResult.MISS,
+                        "------" to GuessResult.MISS,
+                        "--" to GuessResult.MISS,
+                        "-" to GuessResult.MISS,
+                        "---" to GuessResult.MISS,
+                    ),
                 ),
-            ),
-        )
+            )
     }
 }
