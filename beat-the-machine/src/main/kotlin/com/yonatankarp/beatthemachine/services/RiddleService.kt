@@ -10,7 +10,6 @@ import kotlin.random.Random
 
 @Service
 class RiddleService {
-
     companion object {
         private const val MASK_CHARACTER = "-"
 
@@ -18,7 +17,10 @@ class RiddleService {
         private val WHITESPACE_REGEX = """\s+""".toRegex()
     }
 
-    fun handleGuess(id: Int, guess: GuessRequest): List<Pair<String, GuessResult>> {
+    fun handleGuess(
+        id: Int,
+        guess: GuessRequest,
+    ): List<Pair<String, GuessResult>> {
         val riddle = getRiddle(id)
         return guess.words?.let {
             val guesses = guess.words?.split(" ")?.map { it.lowercase() }?.toList() ?: emptyList()
@@ -28,7 +30,10 @@ class RiddleService {
         } ?: riddle.initPrompt()
     }
 
-    fun maskNoneGuessedWords(words: List<String>, prompt: String): List<Pair<String, GuessResult>> =
+    fun maskNoneGuessedWords(
+        words: List<String>,
+        prompt: String,
+    ): List<Pair<String, GuessResult>> =
         prompt.lowercase().split(WHITESPACE_REGEX)
             .map { word ->
                 if (words.contains(word)) {

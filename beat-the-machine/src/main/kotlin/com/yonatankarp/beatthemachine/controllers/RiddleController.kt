@@ -32,7 +32,10 @@ class RiddleController(
     }
 
     @PostMapping(value = ["/{id}/i-give-up"])
-    fun iGiveUp(@PathVariable id: Int, model: Model): String {
+    fun iGiveUp(
+        @PathVariable id: Int,
+        model: Model,
+    ): String {
         log.info("Giving up on riddle id: $id")
         riddleService.getRiddle(id.toRiddleId()).let {
             model.addAttribute("guess", GuessResponse(listOf()))
@@ -44,7 +47,11 @@ class RiddleController(
     }
 
     @PostMapping("/{id}/guess")
-    fun submitGuess(@PathVariable id: Int, @ModelAttribute guess: GuessRequest, model: Model): String {
+    fun submitGuess(
+        @PathVariable id: Int,
+        @ModelAttribute guess: GuessRequest,
+        model: Model,
+    ): String {
         val riddleId = id.toRiddleId()
         log.info("Guess for id $riddleId is ${guess.words}")
         riddleService.handleGuess(riddleId, guess)

@@ -25,11 +25,9 @@ import org.springframework.test.web.servlet.post
 @ExtendWith(SpringExtension::class)
 @WebMvcTest(controllers = [RiddleController::class])
 class RiddleControllerTest {
-
     @MockkBean
     private lateinit var service: RiddleService
 
-    @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private lateinit var mockMvc: MockMvc
 
@@ -92,12 +90,13 @@ class RiddleControllerTest {
         val riddleId = 4
         val riddle = RiddleManager.riddles[riddleId]
         val guess = GuessRequest()
-        val guessHits = listOf(
-            "dragon" to GuessResult.MISS,
-            "eating" to GuessResult.MISS,
-            "a" to GuessResult.MISS,
-            "cookie" to GuessResult.MISS,
-        )
+        val guessHits =
+            listOf(
+                "dragon" to GuessResult.MISS,
+                "eating" to GuessResult.MISS,
+                "a" to GuessResult.MISS,
+                "cookie" to GuessResult.MISS,
+            )
         every { service.handleGuess(any(), any()) } returns guessHits
 
         mockMvc.post("/$riddleId/guess") {
