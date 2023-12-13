@@ -2,8 +2,6 @@
 
 [ci-badge]: https://github.com/yonatankarp/beat-the-machine-deprecated/actions/workflows/ci.yml/badge.svg
 [ci-state]: https://github.com/yonatankarp/beat-the-machine-deprecated/actions/workflows/ci.yml
-[linter-badge]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/linting.yml/badge.svg
-[linter-state]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/linting.yml
 [quality-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=alert_status
 [quality-state]: https://sonarcloud.io/summary/new_code?id=yonatankarp_beat-the-machine
 [maintainability-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=sqale_rating
@@ -17,7 +15,7 @@
 
 | **Type**     | **Status**                                                                                                                                                                             |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| CI pipelines | [![Build][ci-badge]][ci-state]  [![Build][linter-badge]][linter-state]                                                                                                                 |
+| CI pipelines | [![Build][ci-badge]][ci-state]                                                                                                                                                         |
 | Maintenance  | [![Quality Gate Status][quality-badge]][quality-state] [![Maintainability Rating][maintainability-badge]][maintainability-state] [![Technical Debt][tech-debt-badge]][tech-debt-state] |
 | Security     | [![Security Rating][security-badge]][security-state] [![Vulnerabilities][vulnerabilities-badge]][vulnerabilities-state]                                                                |
 
