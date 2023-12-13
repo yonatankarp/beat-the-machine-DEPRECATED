@@ -1,7 +1,7 @@
 # Beat The Machine!
 
-[ci-badge]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/ci.yml/badge.svg
-[ci-state]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/ci.yml
+[ci-badge]: https://github.com/yonatankarp/beat-the-machine-deprecated/actions/workflows/ci.yml/badge.svg
+[ci-state]: https://github.com/yonatankarp/beat-the-machine-deprecated/actions/workflows/ci.yml
 [linter-badge]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/linting.yml/badge.svg
 [linter-state]: https://github.com/yonatankarp/beat-the-machine/actions/workflows/linting.yml
 [quality-badge]: https://sonarcloud.io/api/project_badges/measure?project=yonatankarp_beat-the-machine&metric=alert_status
