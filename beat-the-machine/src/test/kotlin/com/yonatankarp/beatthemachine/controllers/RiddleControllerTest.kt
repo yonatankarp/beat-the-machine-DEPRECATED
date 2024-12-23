@@ -42,7 +42,8 @@ class RiddleControllerTest {
         val riddle = Riddle(1, "---", "cat", "some url")
         every { service.getRandomRiddle() } returns riddle
 
-        mockMvc.get(endpoint)
+        mockMvc
+            .get(endpoint)
             .andExpect {
                 status { isOk() }
                 view { name("index") }
@@ -62,7 +63,8 @@ class RiddleControllerTest {
         val riddle = Riddle(riddleId, "- --- -- --- ----", "a man on the moon", "some url")
         every { service.getRiddle(any()) } returns riddle
 
-        mockMvc.post("/$riddleId/i-give-up")
+        mockMvc
+            .post("/$riddleId/i-give-up")
             .andExpect {
                 status { isOk() }
                 view { name("game") }
@@ -99,17 +101,18 @@ class RiddleControllerTest {
             )
         every { service.handleGuess(any(), any()) } returns guessHits
 
-        mockMvc.post("/$riddleId/guess") {
-            sessionAttrs = mapOf("guess" to guess)
-        }.andExpect {
-            status { isOk() }
-            view { name("game") }
-            model {
-                attribute("guess", GuessRequest())
-                attribute("riddle", riddle)
-                attribute("response", guessHits)
+        mockMvc
+            .post("/$riddleId/guess") {
+                sessionAttrs = mapOf("guess" to guess)
+            }.andExpect {
+                status { isOk() }
+                view { name("game") }
+                model {
+                    attribute("guess", GuessRequest())
+                    attribute("riddle", riddle)
+                    attribute("response", guessHits)
+                }
             }
-        }
 
         verify(exactly = 1) { service.handleGuess(eq(riddleId), eq(guess)) }
     }
