@@ -17,13 +17,13 @@ spotless {
                 }
         )
         // see https://github.com/shyiko/ktlint#standard-rules
-        ktlint()
+        ktlint("1.5.0")
     }
 }
 
 pmd {
     toolVersion = "6.42.0"
-    reportsDir = file("$project.buildDir/reports/pmd")
+    reportsDir = file("${layout.buildDirectory.get()}/reports/pmd")
     ruleSets = []
     ruleSetFiles = files("config/pmd/ruleset.xml")
 }

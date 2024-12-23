@@ -54,7 +54,8 @@ class RiddleController(
     ): String {
         val riddleId = id.toRiddleId()
         log.info("Guess for id $riddleId is ${guess.words}")
-        riddleService.handleGuess(riddleId, guess)
+        riddleService
+            .handleGuess(riddleId, guess)
             .let {
                 model.addAttribute("riddle", RiddleManager.riddles[riddleId])
                 model.addAttribute("guess", guess)

@@ -23,7 +23,11 @@ class RiddleService {
     ): List<Pair<String, GuessResult>> {
         val riddle = getRiddle(id)
         return guess.words?.let {
-            val guesses = guess.words?.split(" ")?.map { it.lowercase() }?.toList() ?: emptyList()
+            val guesses =
+                guess.words
+                    ?.split(" ")
+                    ?.map { it.lowercase() }
+                    ?.toList() ?: emptyList()
 
             return maskNoneGuessedWords(guesses, riddle.prompt)
                 .also { log.info("Phrase '${riddle.prompt}' with guess $guess have the results: $it") }
@@ -34,7 +38,9 @@ class RiddleService {
         words: List<String>,
         prompt: String,
     ): List<Pair<String, GuessResult>> =
-        prompt.lowercase().split(WHITESPACE_REGEX)
+        prompt
+            .lowercase()
+            .split(WHITESPACE_REGEX)
             .map { word ->
                 if (words.contains(word)) {
                     word to HIT
