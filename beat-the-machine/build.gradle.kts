@@ -24,7 +24,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("org.mockito:mockito-core")
     }
-    testImplementation("io.mockk:mockk:1.14.0")
+    testImplementation("io.mockk:mockk:1.14.2")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
 
