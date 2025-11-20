@@ -24,6 +24,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude("org.mockito:mockito-core")
     }
+    testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     testImplementation("io.mockk:mockk:1.14.6")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
 }
@@ -51,6 +52,6 @@ tasks.findByName("spotlessKotlin")?.dependsOn("test")
 tasks.findByName("spotlessKotlin")?.dependsOn("jacocoTestReport")
 
 /* Required for deployment to Railway - see: https://medium.com/codex/deploying-a-kotlin-app-in-railway-a-slack-bot-f1d7a2386652 */
-task("stage") {
+tasks.register("stage") {
     dependsOn("shadowJar")
 }
